@@ -12,8 +12,10 @@ public class Task3 {
         if (arr1.length == 0) {
             return true;
         }
-        int minArr1 = Integer.MAX_VALUE, minArr2 = Integer.MAX_VALUE,
-            maxArr1 = Integer.MIN_VALUE, maxArr2 = Integer.MIN_VALUE;
+        int minArr1 = Integer.MAX_VALUE;
+        int minArr2 = Integer.MAX_VALUE;
+        int maxArr1 = Integer.MIN_VALUE;
+        int maxArr2 = Integer.MIN_VALUE;
 
         for (int num : arr1) {
             minArr1 = Math.min(minArr1, num);

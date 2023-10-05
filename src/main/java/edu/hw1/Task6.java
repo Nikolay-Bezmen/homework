@@ -4,24 +4,36 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Task6 {
-    public int countK(int K) throws IOException {
-        if (K % 1111 == 0 || K < 1000 || K > 9999) {
+
+    public int countK(int num) throws IOException {
+        final int oneThousand = 1000;
+        final int nineX4 = 9999;
+        final int oneX4 = 1111;
+        final int constOfKaprekar = 6174;
+        final int ten = 10;
+        final int one = 1;
+        final int zero = 0;
+        final int two = 2;
+        final int three = 3;
+        final int four = 4;
+        int k = num;
+        if (k % oneX4 == zero || k < oneThousand || k > nineX4) {
             throw new IOException("некоректные входные данные");
         }
-        if (K == 6174) {
-            return 0;
+        if (k == constOfKaprekar) {
+            return zero;
         }
-        int[] nums = new int[4];
-        nums[0] = K % 10;
-        K /= 10;
-        nums[1] = K % 10;
-        K /= 10;
-        nums[2] = K % 10;
-        K /= 10;
-        nums[3] = K;
+        int[] nums = new int[four];
+        nums[zero] = k % ten;
+        k /= ten;
+        nums[one] = k % ten;
+        k /= ten;
+        nums[two] = k % ten;
+        k /= ten;
+        nums[three] = k;
         Arrays.sort(nums);
-        int nextK = (nums[3] * 1000 + nums[2] * 100 + nums[1] * 10 + nums[0]) -
-            (nums[0] * 1000 + nums[1] * 100 + nums[2] * 10 + nums[3]);
-        return 1 + countK(nextK);
+        int nextK = (nums[three] * (oneThousand) + nums[two] * ten * ten + nums[one] * ten + nums[zero])
+            - (nums[zero] * oneThousand + nums[one] * ten * ten + nums[two] * ten + nums[three]);
+        return one + countK(nextK);
     }
 }

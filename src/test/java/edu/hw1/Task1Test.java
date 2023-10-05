@@ -39,15 +39,15 @@ public class Task1Test {
         assertAll(
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00:0"));
-                assertThat(except.getMessage()).isEqualTo("некоректный ввод");
+                assertThat(except.getMessage()).isEqualTo(task.uncorrectInput);
             },
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00:000"));
-                assertThat(except.getMessage()).isEqualTo("некоректный ввод");
+                assertThat(except.getMessage()).isEqualTo(task.uncorrectInput);
             },
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00"));
-                assertThat(except.getMessage()).isEqualTo("некоректный ввод");
+                assertThat(except.getMessage()).isEqualTo(task.uncorrectInput);
             }
         );
     }
@@ -57,11 +57,11 @@ public class Task1Test {
         assertAll(
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00:0a"));
-                assertThat(except.getMessage()).isEqualTo("неизвестный символ");
+                assertThat(except.getMessage()).isEqualTo(task.notDigitSymbol);
             },
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00d:01"));
-                assertThat(except.getMessage()).isEqualTo("неизвестный символ");
+                assertThat(except.getMessage()).isEqualTo(task.notDigitSymbol);
             }
         );
     }
@@ -71,11 +71,11 @@ public class Task1Test {
         assertAll(
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("35791394:50"));
-                assertThat(except.getMessage()).isEqualTo("некоректные цифры во вводе");
+                assertThat(except.getMessage()).isEqualTo(task.uncorrectDigitInInput);
             },
             () -> {
                 var except = assertThrows(IOException.class, () -> task.minutesToSeconds("35791399:01"));
-                assertThat(except.getMessage()).isEqualTo("некоректные цифры во вводе");
+                assertThat(except.getMessage()).isEqualTo(task.uncorrectDigitInInput);
             }
         );
     }

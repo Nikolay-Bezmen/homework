@@ -1,10 +1,15 @@
 package edu.hw1;
 
-
 public class Task7 {
+    public final String incorrectShiftFormat = "неверный формат сдвига";
+    public final String numberShouldBePossible = "число должно быть положительным";
+
     public int rotateRight(int num, int shift) {
         if (shift < 0) {
-            throw new IllegalArgumentException("неверный формат сдвига");
+            throw new IllegalArgumentException(incorrectShiftFormat);
+        }
+        if (num <= 0) {
+            throw new IllegalArgumentException(numberShouldBePossible);
         }
         String binaryNum = Integer.toBinaryString(num);
         int cycle = binaryNum.length();
@@ -18,7 +23,10 @@ public class Task7 {
 
     public int rotateLeft(int num, int shift) {
         if (shift < 0) {
-            throw new IllegalArgumentException("неверный формат сдвига");
+            throw new IllegalArgumentException(incorrectShiftFormat);
+        }
+        if (num <= 0) {
+            throw new IllegalArgumentException(numberShouldBePossible);
         }
         String binaryNum = Integer.toBinaryString(num);
         int cycle = binaryNum.length();

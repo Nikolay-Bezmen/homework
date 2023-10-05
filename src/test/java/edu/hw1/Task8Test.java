@@ -91,7 +91,7 @@ public class Task8Test {
                 {0, 0, 0, 0, 0, 1, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0}
             }));
-            assertThat(expect.getMessage()).isEqualTo("передана неверная доска");
+            assertThat(expect.getMessage()).isEqualTo(task.invalidBoardPassed);
 
         }
     }

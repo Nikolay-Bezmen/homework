@@ -41,11 +41,25 @@ public class Task7Test {
         assertAll(
             () -> {
                 var except = assertThrows(IllegalArgumentException.class, () -> task.rotateRight(999, -1));
-                assertThat(except.getMessage()).isEqualTo("неверный формат сдвига");
+                assertThat(except.getMessage()).isEqualTo(task.incorrectShiftFormat);
             },
             () -> {
                 var except = assertThrows(IllegalArgumentException.class, () -> task.rotateLeft(999, -1));
-                assertThat(except.getMessage()).isEqualTo("неверный формат сдвига");
+                assertThat(except.getMessage()).isEqualTo(task.incorrectShiftFormat);
+            }
+        );
+    }
+
+    @Test
+    void throwIfNumberIsNotPossible() {
+        assertAll(
+            () -> {
+                var except = assertThrows(IllegalArgumentException.class, () -> task.rotateRight(-3525, 23));
+                assertThat(except.getMessage()).isEqualTo(task.numberShouldBePossible);
+            },
+            () -> {
+                var except = assertThrows(IllegalArgumentException.class, () -> task.rotateLeft(-2, 41));
+                assertThat(except.getMessage()).isEqualTo(task.numberShouldBePossible);
             }
         );
     }
