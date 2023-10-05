@@ -1,7 +1,7 @@
 package edu.hw1;
 
 public class Task5 {
-    public static boolean isPalindromeDescendant(int number) {
+    public boolean isPalindromeDescendant(int number) {
         String numberString = String.valueOf(number);
 
         while (numberString.length() > 1) {
@@ -25,7 +25,7 @@ public class Task5 {
         return false;
     }
 
-    public static boolean isPalindrome(String s) {
+    public boolean isPalindrome(String s) {
         int n = s.length();
         for (int i = 0; i < n / 2; ++i) {
             if (s.charAt(i) != s.charAt(n - i - 1)) {

@@ -1,9 +1,13 @@
 package edu.hw1;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Task6 {
-    public static int countK(int K) {
+    public int countK(int K) throws IOException {
+        if (K % 1111 == 0 || K < 1000 || K > 9999) {
+            throw new IOException("некоректные входные данные");
+        }
         if (K == 6174) {
             return 0;
         }

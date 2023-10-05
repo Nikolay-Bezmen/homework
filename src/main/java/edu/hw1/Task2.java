@@ -1,7 +1,7 @@
 package edu.hw1;
 
 public class Task2 {
-    public static int countDigits(long number) {
+    public int countDigits(long number) {
         number = Math.abs(number);
         if (number == 0) {
             return 1;

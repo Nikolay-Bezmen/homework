@@ -1,7 +1,7 @@
 package edu.hw1;
 
 public class Task4 {
-    public static String fixString(String brokenString) {
+    public String fixString(String brokenString) {
         int n = brokenString.length() - brokenString.length() % 2;
         StringBuilder correctString = new StringBuilder();
         for (int i = 0; i < n; i += 2) {
