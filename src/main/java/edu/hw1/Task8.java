@@ -3,17 +3,15 @@ package edu.hw1;
 import java.io.IOException;
 
 public class Task8 {
-    public final String invalidBoardPassed = "передана неверная доска";
+    public static final String INVALID_BOARD_PASSED = "передана неверная доска";
 
     public boolean knightBoardCapture(int[][] field) throws IOException {
-        final int one = 1;
-        final int two = 2;
         int n = field.length;
-        int[][] directions = new int[][] {{two, one}, {two, -one}, {-two, one}, {-two, -one},
-            {one, two}, {one, -two}, {-one, -two}, {-one, two}};
+        int[][] directions = new int[][] {{2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+            {1, 2}, {1, -2}, {-1, -2}, {-1, 2}};
         for (int i = 0; i < n; ++i) {
             if (field[i] == null || field[i].length != n) {
-                throw new IOException(invalidBoardPassed);
+                throw new IOException(INVALID_BOARD_PASSED);
             }
             for (int j = 0; j < n; ++j) {
                 if (field[i][j] == 1) {

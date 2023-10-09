@@ -1,35 +1,31 @@
 package edu.hw1;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class Task2Test {
     Task2 task;
 
     @BeforeEach
-    void Inicialize() {
+    void inicialize() {
         task = new Task2();
     }
 
-    @Test
-    void TestOnValidExamples() {
-        assertAll(
-            () -> assertThat(task.countDigits(4666)).isEqualTo(4),
-            () -> assertThat(task.countDigits(0)).isEqualTo(1),
-            () -> assertThat(task.countDigits(199)).isEqualTo(3),
-            () -> assertThat(task.countDigits(9)).isEqualTo(1),
-            () -> assertThat(task.countDigits(18)).isEqualTo(2)
-        );
+    @ParameterizedTest
+    @CsvSource({
+        "4666,4", "0,1", "199,3", "9,1", "18,2"
+    })
+    void test_on_valid_examples(int number, int countDigitInNumber) {
+        assertThat(task.countDigits(number)).isEqualTo(countDigitInNumber);
     }
 
-    @Test
-    void TestIfNumberNonPositive() {
-        assertAll(
-            () -> assertThat(task.countDigits(-1)).isEqualTo(1),
-            () -> assertThat(task.countDigits(-18392)).isEqualTo(5),
-            () -> assertThat(task.countDigits(-128)).isEqualTo(3)
-        );
+    @ParameterizedTest
+    @CsvSource({
+        "-1,1", "-18392,5", "-128,3"
+    })
+    void test_if_number_non_positive() {
+        assertThat(task.countDigits(-128)).isEqualTo(3);
     }
 }

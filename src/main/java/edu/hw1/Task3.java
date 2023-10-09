@@ -1,9 +1,11 @@
 package edu.hw1;
 
 public class Task3 {
+    public static final String ARRAY_IS_NOT_PASSED = "массив не передан";
+
     public boolean isNestable(int[] arr1, int[] arr2) {
         if (arr1 == null || arr2 == null) {
-            throw new NullPointerException("массив не передан");
+            throw new NullPointerException(ARRAY_IS_NOT_PASSED);
         }
         if (arr2.length < 2) {
             return false;

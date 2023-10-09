@@ -3,41 +3,38 @@ package edu.hw1;
 import java.io.IOException;
 
 public class Task1 {
-    public final String uncorrectDigitInInput = "некоректные цифры во вводе";
-    public final String uncorrectInput = "некоректный ввод";
+    public static final String INCORRECT_DIGIT_IN_INPUT = "некоректные цифры во вводе";
+    public static final String INCORRECT_INPUT = "некоректный ввод";
 
-    public final String notDigitSymbol = "неизвестный символ";
+    public static final String SYMBOL_IS_NOT_DIGIT = "неизвестный символ";
 
-    public long minutesToSeconds(String timeOfVideo) throws IOException {
-        final int sixty = 60;
-        final int two = 2;
-        final long sixtyL = 60L;
+    public int minutesToSeconds(String timeOfVideo) throws IOException {
         String[] times = timeOfVideo.split(":");
-        if (times.length != two || times[1].length() != two) {
-            throw new IOException(uncorrectInput);
+        if (times.length != 2 || times[1].length() != 2) {
+            throw new IOException(INCORRECT_INPUT);
         }
 
         for (char ch : times[0].toCharArray()) {
-            if (ch < '0' || ch > '9') {
-                throw new IOException(notDigitSymbol);
+            if (!Character.isDigit(ch)) {
+                throw new IOException(SYMBOL_IS_NOT_DIGIT);
             }
         }
         for (char ch : times[1].toCharArray()) {
-            if (ch < '0' || ch > '9') {
-                throw new IOException(notDigitSymbol);
+            if (!Character.isDigit(ch)) {
+                throw new IOException(SYMBOL_IS_NOT_DIGIT);
             }
         }
         int minutes = Integer.parseInt(times[0]);
         int seconds = Integer.parseInt(times[1]);
-        if (seconds >= sixty) {
+        if (seconds >= 60) {
             return -1;
         }
-        boolean a = (Integer.MAX_VALUE / sixty) < minutes;
-        boolean b = (Integer.MAX_VALUE / sixty) <= minutes && seconds >= (Integer.MAX_VALUE % sixty);
-        if (a || b) {
-            throw new IOException(uncorrectDigitInInput);
+        boolean isMinutesValueOverflow = (Integer.MAX_VALUE / 60) < minutes;
+        boolean isSecondsValueOverFlow = (Integer.MAX_VALUE / 60) <= minutes && seconds >= (Integer.MAX_VALUE % 60);
+        if (isMinutesValueOverflow || isSecondsValueOverFlow) {
+            throw new IOException(INCORRECT_DIGIT_IN_INPUT);
         }
 
-        return (minutes * sixtyL) + seconds;
+        return (minutes * 60) + seconds;
     }
 }

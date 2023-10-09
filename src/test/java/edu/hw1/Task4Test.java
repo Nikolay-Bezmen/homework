@@ -1,7 +1,8 @@
 package edu.hw1;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Task4Test {
@@ -12,23 +13,12 @@ public class Task4Test {
         task = new Task4();
     }
 
-    @Test
-    void Test1() {
-        assertThat(task.fixString("123456")).isEqualTo("214365");
-    }
-
-    @Test
-    void Test2() {
-        assertThat(task.fixString("hTsii  s aimex dpus rtni.g")).isEqualTo("This is a mixed up string.");
-    }
-
-    @Test
-    void Test3() {
-        assertThat(task.fixString("badce")).isEqualTo("abcde");
-    }
-
-    @Test
-    void Test4() {
-        assertThat(task.fixString("1234567")).isEqualTo("2143657");
+    @ParameterizedTest
+    @CsvSource(
+        {"123456,214365", "hTsii  s aimex dpus rtni.g,This is a mixed up string.",
+            "badce,abcde", "1234567,2143657"}
+    )
+    void test_fixString(String broken, String correct) {
+        assertThat(task.fixString(broken)).isEqualTo(correct);
     }
 }

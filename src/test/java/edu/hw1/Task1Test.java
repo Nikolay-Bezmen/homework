@@ -2,81 +2,57 @@ package edu.hw1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import java.io.IOException;
+import static edu.hw1.Task1.SYMBOL_IS_NOT_DIGIT;
+import static edu.hw1.Task1.INCORRECT_INPUT;
+import static edu.hw1.Task1.INCORRECT_DIGIT_IN_INPUT;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Task1Test {
     Task1 task;
 
     @BeforeEach
-    void Inicialize() {
+    void inicialize() {
         task = new Task1();
     }
 
-    @Test
-    void TestOnValidExamples() {
-        assertAll(
-            () -> assertThat(task.minutesToSeconds("01:00")).isEqualTo(60),
-            () -> assertThat(task.minutesToSeconds("13:56")).isEqualTo(836),
-            () -> assertThat(task.minutesToSeconds("01:00")).isEqualTo(60),
-            () -> assertThat(task.minutesToSeconds("13:56")).isEqualTo(836),
-            () -> assertThat(task.minutesToSeconds("9999:59")).isEqualTo(599_999),
-            () -> assertThat(task.minutesToSeconds("0:00")).isEqualTo(0),
-            () -> assertThat(task.minutesToSeconds("78148:13")).isEqualTo(4_688_893),
-            () -> assertThat(task.minutesToSeconds("99:01")).isEqualTo(5941)
-        );
+    @ParameterizedTest
+    @CsvSource(
+        {"01:00,60",
+            "13:56,836", "9999:59,599_999", "0:00,0", "78148:13,4_688_893", "99:01,5941"
+        }
+    )
+    void test_on_valid_examples(String timeInMinutesAndSeconds, int timeInSeconds) throws IOException {
+        assertThat(task.minutesToSeconds(timeInMinutesAndSeconds)).isEqualTo(timeInSeconds);
     }
 
     @Test
-    void FailIfSecondMoreThenOneMinute() throws IOException {
+    void fail_if_second_more_then_one_minute() throws IOException {
         assertThat(task.minutesToSeconds("01:60")).isEqualTo(-1);
     }
 
-    @Test
-    void throwExceptionIfUncorrectForm() {
-        assertAll(
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00:0"));
-                assertThat(except.getMessage()).isEqualTo(task.uncorrectInput);
-            },
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00:000"));
-                assertThat(except.getMessage()).isEqualTo(task.uncorrectInput);
-            },
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00"));
-                assertThat(except.getMessage()).isEqualTo(task.uncorrectInput);
-            }
-        );
+    @ParameterizedTest
+    @ValueSource(strings = {"00:0", "00:000", "00"})
+    void throw_exception_if_incorrect_form(String time) {
+        var except = assertThrows(IOException.class, () -> task.minutesToSeconds(time));
+        assertThat(except.getMessage()).isEqualTo(INCORRECT_INPUT);
     }
 
-    @Test
-    void throwExceptionIfUnknownForm() {
-        assertAll(
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00:0a"));
-                assertThat(except.getMessage()).isEqualTo(task.notDigitSymbol);
-            },
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("00d:01"));
-                assertThat(except.getMessage()).isEqualTo(task.notDigitSymbol);
-            }
-        );
+    @ParameterizedTest
+    @ValueSource(strings = {"00:0a", "00d:01"})
+    void throw_exception_if_unknown_form(String time) {
+        var except = assertThrows(IOException.class, () -> task.minutesToSeconds(time));
+        assertThat(except.getMessage()).isEqualTo(SYMBOL_IS_NOT_DIGIT);
     }
 
-    @Test
-    void throwExceptionIfOutOfRange() {
-        assertAll(
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("35791394:50"));
-                assertThat(except.getMessage()).isEqualTo(task.uncorrectDigitInInput);
-            },
-            () -> {
-                var except = assertThrows(IOException.class, () -> task.minutesToSeconds("35791399:01"));
-                assertThat(except.getMessage()).isEqualTo(task.uncorrectDigitInInput);
-            }
-        );
+    @ParameterizedTest
+    @ValueSource(strings = {"35791394:50", "35791399:01"})
+    void throw_exception_if_out_of_range(String time) {
+        var except = assertThrows(IOException.class, () -> task.minutesToSeconds(time));
+        assertThat(except.getMessage()).isEqualTo(INCORRECT_DIGIT_IN_INPUT);
     }
 }
