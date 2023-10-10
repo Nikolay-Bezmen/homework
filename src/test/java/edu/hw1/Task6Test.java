@@ -9,6 +9,7 @@ import static edu.hw1.Task6.INCORRECT_INPUT_DATA;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings("MagicNumber")
 public class Task6Test {
     Task6 task;
 

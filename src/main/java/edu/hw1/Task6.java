@@ -3,10 +3,12 @@ package edu.hw1;
 import java.io.IOException;
 import java.util.Arrays;
 
+@SuppressWarnings("MagicNumber")
 public class Task6 {
     public static final String INCORRECT_INPUT_DATA = "некоректные входные данные";
 
-    public int countK(int k) throws IOException {
+    public int countK(int num) throws IOException {
+        int k = num;
         if (k % 1111 == 0 || k <= 1000 || k > 9999) {
             throw new IOException(INCORRECT_INPUT_DATA);
         }

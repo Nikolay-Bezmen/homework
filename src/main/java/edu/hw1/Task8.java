@@ -2,6 +2,7 @@ package edu.hw1;
 
 import java.io.IOException;
 
+@SuppressWarnings("MagicNumber")
 public class Task8 {
     public static final String INVALID_BOARD_PASSED = "передана неверная доска";
 

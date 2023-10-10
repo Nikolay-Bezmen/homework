@@ -1,5 +1,6 @@
 package edu.hw1;
 
+@SuppressWarnings("MagicNumber")
 public class Task2 {
     public int countDigits(long num) {
         long x = Math.abs(num);

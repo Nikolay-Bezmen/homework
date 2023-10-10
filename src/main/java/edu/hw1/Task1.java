@@ -2,6 +2,7 @@ package edu.hw1;
 
 import java.io.IOException;
 
+@SuppressWarnings("MagicNumber")
 public class Task1 {
     public static final String INCORRECT_DIGIT_IN_INPUT = "некоректные цифры во вводе";
     public static final String INCORRECT_INPUT = "некоректный ввод";
