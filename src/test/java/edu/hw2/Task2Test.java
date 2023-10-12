@@ -11,15 +11,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class Task2Test {
     static Arguments[] shapes() {
         return new Arguments[]{
-            Arguments.of(new Rectangle(20, 10)),
-            Arguments.of(new Square(20))
+            Arguments.of(new Rectangle(20, 10), 200),
+            Arguments.of(new Square(20), 400)
         };
     }
 
     @ParameterizedTest
     @MethodSource("shapes")
-    void rectangleArea(Shape shape) {
+    void rectangleArea(Shape shape, double area) {
 
-        assertThat(shape.area()).isEqualTo(200.0);
+        assertThat(shape.area()).isEqualTo(area);
     }
 }

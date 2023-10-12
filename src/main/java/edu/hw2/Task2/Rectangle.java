@@ -1,19 +1,30 @@
 package edu.hw2.Task2;
 
-public class Rectangle extends Shape{
+public class Rectangle implements Shape{
+    int height;
+    int width;
     public Rectangle(int width, int height) {
-        super(width, height);
+        this.width = width;
+        this.height = height;
     }
 
     public void setWidth(int width) {
-        super.setWidth(width);
+        this.width = width;
     }
 
     public void setHeight(int height) {
-        super.setHeight(height);
+        this.height = height;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 
     public double area() {
-        return this.getHeight() * this.getWidth();
+        return this.height * this.width;
     }
 }
