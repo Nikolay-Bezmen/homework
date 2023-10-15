@@ -2,6 +2,7 @@ package edu.hw2.Task2;
 
 public class Square implements Shape {
     int side;
+
     public Square(int side) {
         this.side = side;
     }

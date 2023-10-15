@@ -4,6 +4,8 @@ public class ConnectionException extends RuntimeException {
     public ConnectionException(String overFaultyConnect) {
         super(overFaultyConnect);
     }
-    public ConnectionException() {}
+
+    public ConnectionException() {
+    }
 
 }

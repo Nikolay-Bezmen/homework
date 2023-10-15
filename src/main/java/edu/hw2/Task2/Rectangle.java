@@ -1,8 +1,9 @@
 package edu.hw2.Task2;
 
-public class Rectangle implements Shape{
+public class Rectangle implements Shape {
     int height;
     int width;
+
     public Rectangle(int width, int height) {
         this.width = width;
         this.height = height;

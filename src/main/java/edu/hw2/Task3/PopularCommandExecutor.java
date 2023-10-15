@@ -1,7 +1,10 @@
 package edu.hw2.Task3;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PopularCommandExecutor {
+    private final static Logger LOGGER = LogManager.getLogger();
     public final static String CONNECT_IS_FAULTY = "Соединения не произошло!";
     private final ConnectionManager manager;
     private final int maxAttempts;
@@ -16,22 +19,22 @@ public class PopularCommandExecutor {
         tryExecute(COMMAND);
     }
 
-    private void tryExecute(String command) throws ConnectionException{
+    private void tryExecute(String command) throws ConnectionException {
         int countTryies = 0;
-        while(maxAttempts != countTryies){
+        while (maxAttempts != countTryies) {
             ++countTryies;
             Connection currentConnection = manager.getConnection();
-            try{
+            try {
                 currentConnection.execute(command);
                 return;
-            }catch (ConnectionException e){
-                System.out.println("Соединения не произошло; попыток осталось " +
-                    (maxAttempts - countTryies));
-            }finally {
+            } catch (ConnectionException e) {
+                LOGGER.info("Соединения не произошло; попыток осталось "
+                    + (maxAttempts - countTryies));
+            } finally {
                 try {
                     currentConnection.close();
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
+                } catch (Exception e) {
+                    LOGGER.info(e.getMessage());
                 }
             }
         }

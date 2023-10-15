@@ -1,9 +1,12 @@
 package edu.hw2.Task1;
-import edu.hw2.Task1.Expr.Constant;
-import edu.hw2.Task1.Expr.Addition;
-import edu.hw2.Task1.Expr.Multiplication;
-import edu.hw2.Task1.Expr.Exponent;
+
+import edu.hw2.Task1.Expr.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+@SuppressWarnings("MagicNumber")
 public class Task1 {
+    private final static Logger LOGGER = LogManager.getLogger();
     public static void main(String[] args) {
 
         var two = new Constant(2);
@@ -14,7 +17,7 @@ public class Task1 {
         var exp = new Exponent(mult, 2);
         var res = new Addition(exp, new Constant(1));
 
-        System.out.println(res + " = " + res.evaluate());
+        LOGGER.info(res + " = " + res.evaluate());
     }
 }
 

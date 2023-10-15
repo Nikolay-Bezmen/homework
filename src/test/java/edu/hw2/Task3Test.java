@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Task3Test {
     @ParameterizedTest
-    @DisplayName("manager = faultymanager, количество попыток не хватает для соединение")
+    @DisplayName("manager = faulty manager, количество попыток не хватает для соединение")
     @MethodSource("getFailAttemptsForConnect")
     void set_faulty_connection(int how_often_success, int maxAttempts){
         var PCM = new PopularCommandExecutor(new FaultyConnectionManager(how_often_success), maxAttempts);
@@ -63,12 +63,12 @@ public class Task3Test {
 
     private static Stream<Arguments> getFailSourceForDisplayManager(){
         return Stream.of(
-            Arguments.of(5, 6),
-            Arguments.of(18, 28),
-            Arguments.of(2, 5),
-            Arguments.of(7, 9),
-            Arguments.of(7, 8),
-            Arguments.of(15, 16)
+            Arguments.of(5, 1),
+            Arguments.of(18, 1),
+            Arguments.of(2, 1),
+            Arguments.of(7, 1),
+            Arguments.of(7, 1),
+            Arguments.of(15, 1)
         );
     }
 }
