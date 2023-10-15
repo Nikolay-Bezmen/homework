@@ -1,23 +1,28 @@
 package edu.hw2.Task3;
 
-import java.util.Random;
-
 public class FaultyConnection implements Connection{
-    private static final String OVER_FAULTY_CONNECT = "ошибка, плохое соединение";
-    private final static String CONNECT_WORKED_SUCCESSFULLY = "произошло успешное соединение";
-    private final static String CLOSE_IS_SUCCES = "соединение закрылось успешно";
+    private static int countAttempts = 0;
+    public int HOW_OFTEN_SUCCESS;
+    public final static String CONNECT_WORKED_SUCCESSFULLY = "произошло успешное соединение";
+    public final static String CLOSE_IS_SUCCESS = "соединение закрылось успешно";
+    FaultyConnection(int how_often_succes){
+        HOW_OFTEN_SUCCESS = how_often_succes;
+    }
+
+    public static void newConnect(){
+        countAttempts = 0;
+    }
     @Override
-    public void execute(String command) throws Exception {
-        if(new Random().nextInt() % 4 == 1){
-            throw new ConnectionException(OVER_FAULTY_CONNECT);
+    public void execute(String command) throws ConnectionException {
+        if(++countAttempts % HOW_OFTEN_SUCCESS != 0){
+            throw new ConnectionException();
         }
         System.out.println(CONNECT_WORKED_SUCCESSFULLY);
         System.out.println("команда " + command + " выполнилась успешно");
-        close();
     }
 
     @Override
-    public void close() throws Exception {
-        System.out.println(CLOSE_IS_SUCCES);
+    public void close() {
+        System.out.println(CLOSE_IS_SUCCESS);
     }
 }

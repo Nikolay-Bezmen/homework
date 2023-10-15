@@ -5,7 +5,8 @@ public sealed interface Expr {
 
     public final record Constant(double value) implements Expr {
         public double evaluate() {
-            return value;
+            final double v = value;
+            return v;
         }
     }
 

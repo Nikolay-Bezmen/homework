@@ -1,7 +1,8 @@
 package edu.hw2.Task3;
 
 
-public final class PopularCommandExecutor {
+public class PopularCommandExecutor {
+    public final static String CONNECT_IS_FAULTY = "Соединения не произошло!";
     private final ConnectionManager manager;
     private final int maxAttempts;
 
@@ -10,8 +11,9 @@ public final class PopularCommandExecutor {
         this.maxAttempts = maxAttempts;
     }
 
-    void updatePackages() {
-        tryExecute("apt update && apt upgrade -y");
+    public void updatePackages() {
+        String COMMAND = "apt update && apt upgrade -y";
+        tryExecute(COMMAND);
     }
 
     private void tryExecute(String command) throws ConnectionException{
@@ -21,9 +23,19 @@ public final class PopularCommandExecutor {
             Connection currentConnection = manager.getConnection();
             try{
                 currentConnection.execute(command);
-            }catch(Exception e){
-                System.out.println(e.getMessage());
+                return;
+            }catch (ConnectionException e){
+                System.out.println("Соединения не произошло; попыток осталось " +
+                    (maxAttempts - countTryies));
+            }finally {
+                try {
+                    currentConnection.close();
+                }catch (Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
+
+        throw new ConnectionException(CONNECT_IS_FAULTY);
     }
 }
