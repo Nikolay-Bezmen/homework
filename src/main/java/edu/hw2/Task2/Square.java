@@ -1,22 +1,20 @@
 package edu.hw2.Task2;
 
-public class Square implements Shape {
-    int side;
+public class Square extends Rectangle {
 
     public Square(int side) {
-        this.side = side;
+        super(side, side);
     }
 
-    public int getSide() {
-        return side;
+    public Square setWidth(int width) {
+        return new Square(width);
     }
 
-    public void setSide(int side) {
-        this.side = side;
+    public Square setHeight(int height) {
+        return new Square(height);
     }
 
-    @Override
-    public double area() {
-        return this.side * this.side;
+    public Square setSide(int side) {
+        return new Square(side);
     }
 }

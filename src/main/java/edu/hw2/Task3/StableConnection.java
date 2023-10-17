@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 
 public class StableConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static String CONNECT_WORKED_SUCCESSFULLY = "произошло успешное соединение";
     private final static String CLOSE_IS_SUCCES = "соединение закрылось успешно";
 
     StableConnection() {
@@ -14,8 +13,7 @@ public class StableConnection implements Connection {
 
     @Override
     public void execute(String command) {
-        LOGGER.info(CONNECT_WORKED_SUCCESSFULLY);
-        LOGGER.info("команда " + command + " выполнилась успешно");
+        LOGGER.info("команда " + command + " выполнилась успешно через стабильное соединение");
     }
 
     @Override

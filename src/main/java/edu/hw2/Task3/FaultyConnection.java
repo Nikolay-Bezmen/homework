@@ -7,7 +7,6 @@ public class FaultyConnection implements Connection {
     private final static Logger LOGGER = LogManager.getLogger();
     private static int countAttempts = 0;
     public int HOW_OFTEN_SUCCESS;
-    public final static String CONNECT_WORKED_SUCCESSFULLY = "произошло успешное соединение";
     public final static String CLOSE_IS_SUCCESS = "соединение закрылось успешно";
 
     FaultyConnection(int how_often_succes) {
@@ -23,8 +22,7 @@ public class FaultyConnection implements Connection {
         if (++countAttempts % HOW_OFTEN_SUCCESS != 0) {
             throw new ConnectionException();
         }
-        LOGGER.info(CONNECT_WORKED_SUCCESSFULLY);
-        LOGGER.info("команда " + command + " выполнилась успешно");
+        LOGGER.info("команда " + command + " выполнилась успешно через проблемное соединение");
     }
 
     @Override

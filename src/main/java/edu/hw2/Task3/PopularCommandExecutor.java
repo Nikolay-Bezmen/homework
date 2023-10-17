@@ -23,19 +23,11 @@ public class PopularCommandExecutor {
         int countTryies = 0;
         while (maxAttempts != countTryies) {
             ++countTryies;
-            Connection currentConnection = manager.getConnection();
-            try {
+            try (Connection currentConnection = manager.getConnection()) {
                 currentConnection.execute(command);
                 return;
-            } catch (ConnectionException e) {
-                LOGGER.info("Соединения не произошло; попыток осталось "
-                    + (maxAttempts - countTryies));
-            } finally {
-                try {
-                    currentConnection.close();
-                } catch (Exception e) {
-                    LOGGER.info(e.getMessage());
-                }
+            } catch (Exception e) {
+                LOGGER.info(e.getMessage());
             }
         }
 

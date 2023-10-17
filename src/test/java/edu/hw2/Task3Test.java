@@ -16,15 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Task3Test {
     @ParameterizedTest
-    @DisplayName("manager = faulty manager, количество попыток не хватает для соединение")
+    @DisplayName("manager = faulty manager, количество попыток не хватает для соединения")
     @MethodSource("getFailAttemptsForConnect")
-    void set_faulty_connection(int how_often_success, int maxAttempts){
+    void set_faulty_connection(int how_often_success, int maxAttempts) {
         var PCM = new PopularCommandExecutor(new FaultyConnectionManager(how_often_success), maxAttempts);
+
         var except = assertThrows(ConnectionException.class, PCM::updatePackages);
+
         assertThat(except.getMessage()).isEqualTo(CONNECT_IS_FAULTY);
     }
 
-    private static Stream<Arguments> getFailAttemptsForConnect(){
+    private static Stream<Arguments> getFailAttemptsForConnect() {
         return Stream.of(
             Arguments.of(9879, 99),
             Arguments.of(18, 17),
@@ -37,11 +39,12 @@ public class Task3Test {
     @ParameterizedTest
     @DisplayName("manager = faultymanager, количество попыток хватает для соединение")
     @MethodSource("getGoodAttemptsForFaultyManagert")
-    void set_success_connection(int how_often_success, int maxAttempts){
+    void set_success_connection(int how_often_success, int maxAttempts) {
         assertDoesNotThrow(() ->
             new PopularCommandExecutor(new FaultyConnectionManager(how_often_success), maxAttempts).updatePackages());
     }
-    private static Stream<Arguments> getGoodAttemptsForFaultyManagert(){
+
+    private static Stream<Arguments> getGoodAttemptsForFaultyManagert() {
         return Stream.of(
             Arguments.of(5, 6),
             Arguments.of(18, 28),
@@ -52,16 +55,17 @@ public class Task3Test {
         );
     }
 
-
     @ParameterizedTest
     @MethodSource("getFailSourceForDisplayManager")
-    void set_fail_connection_display_connection(int how_often_success, int maxAttempts){
+    void set_fail_connection_display_connection(int how_often_success, int maxAttempts) {
         var PCM = new PopularCommandExecutor(new DefaultConnectionManager(how_often_success), maxAttempts);
+
         var except = assertThrows(ConnectionException.class, PCM::updatePackages);
+
         assertThat(except.getMessage()).isEqualTo(CONNECT_IS_FAULTY);
     }
 
-    private static Stream<Arguments> getFailSourceForDisplayManager(){
+    private static Stream<Arguments> getFailSourceForDisplayManager() {
         return Stream.of(
             Arguments.of(5, 1),
             Arguments.of(18, 1),

@@ -1,25 +1,45 @@
 package edu.hw2;
 
 import edu.hw2.Task2.Rectangle;
-import edu.hw2.Task2.Shape;
 import edu.hw2.Task2.Square;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
-    static Arguments[] shapes() {
-        return new Arguments[]{
-            Arguments.of(new Rectangle(20, 10), 200),
-            Arguments.of(new Square(20), 400)
-        };
+
+    @Test
+    void rectangle_area(){
+        Rectangle rectangle = new Rectangle(20, 10);
+
+        rectangle = rectangle.setHeight(20);
+        rectangle = rectangle.setWidth(30);
+
+        assertThat(rectangle.area()).isEqualTo(600);
     }
 
-    @ParameterizedTest
-    @MethodSource("shapes")
-    void rectangleArea(Shape shape, double area) {
+    @Test
+    void square_area_if_use_set_hight(){
+        Square square = new Square(20);
 
-        assertThat(shape.area()).isEqualTo(area);
+        square = square.setHeight(30);
+
+        assertThat(square.area()).isEqualTo(900);
+    }
+    @Test
+    void square_area_if_use_set_width(){
+        Square square = new Square(20);
+
+        square = square.setWidth(30);
+
+        assertThat(square.area()).isEqualTo(900);
+    }
+
+    @Test
+    void square_area_if_use_set_side(){
+        Square square = new Square(20);
+
+        square = square.setSide(30);
+
+        assertThat(square.area()).isEqualTo(900);
     }
 }
