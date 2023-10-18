@@ -16,6 +16,7 @@ public class Task1Test {
     @Test
     void negate_test(){
         Constant constant = new Constant(5);
+
         Negate negate = new Negate(constant);
 
         assertThat(negate.evaluate()).isEqualTo(-5);
@@ -25,6 +26,7 @@ public class Task1Test {
     void addition_test(){
         Constant constant1 = new Constant(2);
         Constant constant2 = new Constant(3);
+
         Addition addition = new Addition(constant1, constant2);
 
         assertThat(addition.evaluate()).isEqualTo(5);
@@ -33,6 +35,7 @@ public class Task1Test {
     @Test
     void exponent_test(){
         Constant constant = new Constant(3);
+
         Exponent exponent = new Exponent(constant, 3);
 
         assertThat(exponent.evaluate()).isEqualTo(27);
@@ -40,6 +43,7 @@ public class Task1Test {
 
     @Test
     void multiplication_test(){
+
         Constant constant1 = new Constant(3);
         Constant constant2 = new Constant(4);
 
