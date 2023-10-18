@@ -15,8 +15,7 @@ public class PopularCommandExecutor {
     }
 
     public void updatePackages() {
-        String COMMAND = "apt update && apt upgrade -y";
-        tryExecute(COMMAND);
+        tryExecute("apt update && apt upgrade -y");
     }
 
     private void tryExecute(String command) throws ConnectionException {
