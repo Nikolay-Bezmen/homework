@@ -28,8 +28,9 @@ public class Task1Test {
         Constant constant2 = new Constant(3);
 
         Addition addition = new Addition(constant1, constant2);
+        double result = addition.evaluate();
 
-        assertThat(addition.evaluate()).isEqualTo(5);
+        assertThat(result).isEqualTo(5);
     }
 
     @Test
@@ -37,8 +38,9 @@ public class Task1Test {
         Constant constant = new Constant(3);
 
         Exponent exponent = new Exponent(constant, 3);
+        double result = exponent.evaluate();
 
-        assertThat(exponent.evaluate()).isEqualTo(27);
+        assertThat(result).isEqualTo(27);
     }
 
     @Test
@@ -48,7 +50,8 @@ public class Task1Test {
         Constant constant2 = new Constant(4);
 
         Multiplication multiplication = new Multiplication(constant1, constant2);
+        double result = multiplication.evaluate();
 
-        assertThat(multiplication.evaluate()).isEqualTo(12);
+        assertThat(result).isEqualTo(12);
     }
 }
