@@ -1,4 +1,4 @@
-package edu.project1;
+package edu.hw1;
 
 import edu.project1.Hangman.Hangman;
 

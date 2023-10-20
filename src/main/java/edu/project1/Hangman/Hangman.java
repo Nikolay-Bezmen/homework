@@ -1,78 +1,64 @@
 package edu.project1.Hangman;
 
-import edu.project1.Utils.ListUtils;
-import java.util.List;
+import edu.project1.GameSession.GameSession;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@SuppressWarnings("MagicNumber")
+@SuppressWarnings({"MemberName", "MagicNumber"})
 public class Hangman {
     private final static Logger LOGGER = LogManager.getLogger();
-    protected static List<String> setWords = List.of("banana", "chocolate", "coffee", "apple", "horse");
-    private final String guessWord;
-    private final Set<Character> guessChars;
-    private boolean[] chars;
-    private int countGuessedChars;
-    private static final int COUNT_AVAILABLE_MISTAKE = 5;
-    private int numberOfMistakesMade;
     private final Scanner scanner;
+    GameSession gameSession;
+
+    private final String EXIT = "exit";
 
     public Hangman() {
         this.scanner = new Scanner(System.in);
-        this.guessWord = ListUtils.getRandomItem(setWords);
-        this.guessChars = this.numberOfDifferenceLetters(guessWord);
-        this.chars = new boolean[26];
-        this.countGuessedChars = 0;
-        this.numberOfMistakesMade = 0;
     }
 
     public void run() {
-        try {
-            while (!wordIsGuessed() && countMistakesIsValid()) {
-                LOGGER.info("Guess a letter:");
-                char nextGuessLetter = scanner.nextLine().charAt(0);
-                if (guessChars.contains(nextGuessLetter)) {
-                    LOGGER.info("Hit!");
-                    ++countGuessedChars;
-                    chars[nextGuessLetter - 'a'] = true;
-                } else {
-                    LOGGER.info("Missed, mistake " + ++numberOfMistakesMade + " out of " + COUNT_AVAILABLE_MISTAKE);
+
+        boolean exit = false;
+        LOGGER.info("if you wanna finish game then input exit");
+        while (!exit) {
+            gameSession = new GameSession();
+            try {
+                while (!gameSession.wordIsGuessed() && gameSession.countMistakesIsValid()) {
+                    LOGGER.info("Guess a letter:");
+                    String line = scanner.nextLine();
+                    if (line.equals(EXIT)) {
+                        exit = true;
+                        break;
+                    }
+                    if (!isIncorrectLine(line)) {
+                        LOGGER.info("incorrect input data, try again");
+                        continue;
+                    }
+                    if (gameSession.getChars().contains(line.charAt(0))) {
+                        LOGGER.info("Hit!");
+                        gameSession.addGuessedLetter(line.charAt(0));
+                    } else {
+                        LOGGER.info("Missed, mistake " + gameSession.incremAmountMistakes()
+                            + " out of " + gameSession.getCountAvailableMistakes());
+                    }
+                    LOGGER.info("The word: " + gameSession.showGuessedLetterInWord());
                 }
-                LOGGER.info("The word: " + showGuessedLetterInWord());
+
+                LOGGER.info(gameSession.wordIsGuessed() ? "YOU WON" : "YOU LOST");
+            } catch (Exception e) {
+                LOGGER.info(e.getStackTrace());
             }
-
-            LOGGER.info(wordIsGuessed() ? "YOU WON" : "YOU LOST");
-        } catch (Exception e) {
-            LOGGER.info(e.getStackTrace());
-        }
-    }
-
-    protected String showGuessedLetterInWord() {
-        StringBuilder word = new StringBuilder();
-        for (char ch : guessWord.toCharArray()) {
-            if (chars[ch - 'a']) {
-                word.append(ch);
-            } else {
-                word.append("*");
+            LOGGER.info("you wanna new game?");
+            if (scanner.nextLine().equals(EXIT)) {
+                exit = true;
             }
         }
-
-        return word.toString();
     }
 
-    protected boolean wordIsGuessed() {
-        return countGuessedChars == guessChars.size();
-    }
-
-    protected boolean countMistakesIsValid() {
-        return numberOfMistakesMade < COUNT_AVAILABLE_MISTAKE;
-    }
-
-    protected Set<Character> numberOfDifferenceLetters(String word) {
-        return word.chars().mapToObj(c -> (char) c).collect(Collectors.toSet());
+    public boolean isIncorrectLine(String line) {
+        return line.length() == 1 && line.charAt(0) <= 'z'
+            && line.charAt(0) >= 'a' && !gameSession.getGuessedChars().contains(line.charAt(0));
     }
 
 }

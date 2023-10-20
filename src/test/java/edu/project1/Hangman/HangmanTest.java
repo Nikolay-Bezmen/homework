@@ -1,40 +1,32 @@
 package edu.project1.Hangman;
 
-import org.junit.jupiter.api.Test;
-import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class HangmanTest {
-    @Test
-    void word_is_guessed() {
-        Hangman hangman = new Hangman();
+    Hangman hangman;
+    @BeforeEach
+    void set_up(){
+        hangman = new Hangman();
 
-        boolean result = hangman.wordIsGuessed();
+    }
+    @ParameterizedTest
+    @MethodSource("getIncorrectLines")
+    void check_incorrect_line(String line){
+        boolean correct = hangman.isIncorrectLine(line);
 
-        assertThat(result).isEqualTo(false);
+        assertThat(correct).isFalse();
     }
 
-    @Test
-    void test_word_to_set() {
-        String word = "appleblack";
-        Set<Character> set = Set.of('a', 'p', 'l', 'e', 'b', 'k', 'c');
-
-        Set<Character> resultSet = new Hangman().numberOfDifferenceLetters(word);
-
-        assertThat(resultSet).isEqualTo(set);
-    }
-
-    @Test
-    void test_show_guess_letters() {
-        String result = new Hangman().showGuessedLetterInWord();
-
-        assertThat(result.chars().filter(c -> c == '*').count()).isEqualTo(result.length());
-    }
-
-    @Test
-    void test_count_of_mistake() {
-        boolean result = new Hangman().countMistakesIsValid();
-
-        assertThat(result).isTrue();
+    private static Stream<Arguments> getIncorrectLines(){
+        return Stream.of(
+            Arguments.of("0"),
+            Arguments.of("rqtqt"),
+            Arguments.of("A")
+        );
     }
 }
