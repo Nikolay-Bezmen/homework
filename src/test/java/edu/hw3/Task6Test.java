@@ -43,7 +43,33 @@ public class Task6Test {
     }
 
     @Test
-    void test_most_valuable_stock() {
+    void test_most_valuable_stock_first() {
+        Stock apple = new Stock("Apple", 105);
+        Stock microsoft = new Stock("Microsoft", 250);
+
+        stockOfMarket.add(apple);
+        stockOfMarket.add(microsoft);
+
+        assertThat(stockOfMarket.mostValuableStock()).isEqualTo(microsoft);
+    }
+
+    @Test
+    void test_most_valuable_stock_second() {
+        Stock apple = new Stock("Apple", 105);
+        Stock microsoft = new Stock("Microsoft", 250);
+        Stock BMW = new Stock("BMW", 198);
+        Stock SP500 = new Stock("SP500", 287);
+
+        stockOfMarket.add(apple);
+        stockOfMarket.add(microsoft);
+        stockOfMarket.add(BMW);
+        stockOfMarket.add(SP500);
+
+        assertThat(stockOfMarket.mostValuableStock()).isEqualTo(SP500);
+    }
+
+    @Test
+    void test_most_valuable_stock_third() {
         Stock apple = new Stock("Apple", 105);
         Stock microsoft = new Stock("Microsoft", 250);
         Stock BMW = new Stock("BMW", 198);
@@ -53,17 +79,12 @@ public class Task6Test {
 
         stockOfMarket.add(apple);
         stockOfMarket.add(microsoft);
-
-        assertThat(stockOfMarket.mostValuableStock()).isEqualTo(microsoft);
-
         stockOfMarket.add(BMW);
         stockOfMarket.add(SP500);
-
-        assertThat(stockOfMarket.mostValuableStock()).isEqualTo(SP500);
-
         stockOfMarket.add(amazon);
         stockOfMarket.add(tiktok);
 
         assertThat(stockOfMarket.mostValuableStock()).isEqualTo(tiktok);
     }
+
 }

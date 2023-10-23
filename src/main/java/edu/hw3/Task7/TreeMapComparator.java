@@ -5,14 +5,17 @@ import java.util.Comparator;
 public class TreeMapComparator<T> implements Comparator<T> {
     @Override
     public int compare(T o1, T o2) {
+        int resultOfCompare;
         if (o1 == null && o2 == null) {
-            return 0;
+            resultOfCompare = 0;
         } else if (o1 == null) {
-            return -1;
+            resultOfCompare = -1;
         } else if (o2 == null) {
-            return 1;
+            resultOfCompare = 1;
+        } else {
+            resultOfCompare = ((Comparable<T>) o1).compareTo(o2);
         }
 
-        return ((Comparable<T>) o1).compareTo(o2);
+        return resultOfCompare;
     }
 }

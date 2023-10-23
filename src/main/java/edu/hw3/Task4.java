@@ -5,6 +5,7 @@ import java.util.Map;
 
 @SuppressWarnings({"HideUtilityClassConstructor", "MagicNumber"})
 public class Task4 {
+    private static final Map<Integer, String> CONVERT = new LinkedHashMap<>();
     public static final String INCORRECT_NUMBER = "incorrect number";
 
     public static String convertToRoman(int num) {
@@ -16,25 +17,23 @@ public class Task4 {
         if (number == 0) {
             return "";
         }
-
-        Map<Integer, String> convert = new LinkedHashMap<>();
-        convert.put(1000, "M");
-        convert.put(900, "CM");
-        convert.put(500, "D");
-        convert.put(400, "CD");
-        convert.put(100, "C");
-        convert.put(90, "XC");
-        convert.put(50, "L");
-        convert.put(40, "XL");
-        convert.put(10, "X");
-        convert.put(9, "IX");
-        convert.put(5, "V");
-        convert.put(4, "IV");
-        convert.put(1, "I");
+        CONVERT.put(1000, "M");
+        CONVERT.put(900, "CM");
+        CONVERT.put(500, "D");
+        CONVERT.put(400, "CD");
+        CONVERT.put(100, "C");
+        CONVERT.put(90, "XC");
+        CONVERT.put(50, "L");
+        CONVERT.put(40, "XL");
+        CONVERT.put(10, "X");
+        CONVERT.put(9, "IX");
+        CONVERT.put(5, "V");
+        CONVERT.put(4, "IV");
+        CONVERT.put(1, "I");
 
         StringBuilder sb = new StringBuilder();
 
-        for (var box : convert.entrySet()) {
+        for (var box : CONVERT.entrySet()) {
             while (box.getKey() <= number) {
                 sb.append(box.getValue());
                 number -= box.getKey();

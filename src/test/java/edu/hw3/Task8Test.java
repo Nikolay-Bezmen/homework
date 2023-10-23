@@ -3,7 +3,6 @@ package edu.hw3;
 import edu.hw3.Task8.BackwardIterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw3.Task8.BackwardIterator.HAS_NOT_NEXT_ELEMENT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -14,12 +13,7 @@ public class Task8Test {
 
     @BeforeEach
     void set_up() {
-        list = new ArrayList<>();
-
-        list.add(3);
-        list.add(2);
-        list.add(1);
-
+        list = List.of(3,2,1);
     }
 
     @Test

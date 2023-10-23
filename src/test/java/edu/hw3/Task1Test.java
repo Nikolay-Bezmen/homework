@@ -5,12 +5,11 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 import static edu.hw3.Task1.atbash;
+import static edu.hw3.Task1.getMirrorLetter;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task1Test {
-    @ParameterizedTest
-    @MethodSource("getLines")
-    void check_diff_line(String line, String resultLine) {
+    @ParameterizedTest @MethodSource("getLines") void check_diff_line(String line, String resultLine) {
         String resultOfWork = atbash(line);
 
         assertThat(resultOfWork).isEqualTo(resultLine);
@@ -28,6 +27,21 @@ public class Task1Test {
             Arguments.of("fnenijgng ksmfknag kengoingirgn", "umvmrqtmt phnupmzt pvmtlrmtritm"),
             Arguments.of("", ""),
             Arguments.of(null, null)
+        );
+    }
+
+    @ParameterizedTest @MethodSource("getLetters") void test_if_is_mirror_letter(char letter, char mirrorLetter) {
+        char resultOfWork = getMirrorLetter(letter);
+
+        assertThat(resultOfWork).isEqualTo(mirrorLetter);
+    }
+
+    private static Stream<Arguments> getLetters() {
+        return Stream.of(
+            Arguments.of('a', 'z'),
+            Arguments.of('A', 'Z'),
+            Arguments.of('z', 'a'),
+            Arguments.of('Z', 'A')
         );
     }
 }
