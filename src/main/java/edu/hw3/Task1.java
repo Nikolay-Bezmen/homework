@@ -8,27 +8,23 @@ public class Task1 {
         }
         StringBuilder ans = new StringBuilder();
         for (char ch : line.toCharArray()) {
-            char symbol = ch;
             if (Character.isAlphabetic(ch)) {
-                symbol = getMirrorLetter(ch);
+                ans.append(getMirrorLetter(ch));
+            } else {
+                ans.append(ch);
             }
-
-            ans.append(symbol);
         }
 
         return ans.toString();
     }
 
     protected static char getMirrorLetter(char letter) {
-        char mirrorLetter;
         if (letter <= 'Z') {
             int bigA = 'Z' - letter;
-            mirrorLetter = (char) (bigA + 'A');
+            return (char) (bigA + 'A');
         } else {
             int a = 'z' - letter;
-            mirrorLetter = (char) (a + 'a');
+            return (char) (a + 'a');
         }
-
-        return mirrorLetter;
     }
 }
