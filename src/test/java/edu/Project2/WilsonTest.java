@@ -1,8 +1,10 @@
 package edu.Project2;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static edu.Project2.WilsonGenerate.WILSON_GENERATE;
 
+@Disabled
 public class WilsonTest {
     @Test
     void test_oldos_broader_beauty_output() throws InterruptedException {

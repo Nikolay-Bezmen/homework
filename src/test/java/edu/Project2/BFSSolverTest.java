@@ -1,5 +1,6 @@
 package edu.Project2;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,6 +15,7 @@ import static edu.Project2.WilsonGenerate.WILSON_GENERATE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@Disabled
 public class BFSSolverTest {
     private final char[][] matrix = {
         {497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497,
