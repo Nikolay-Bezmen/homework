@@ -5,7 +5,7 @@ import java.util.List;
 import static edu.Project2.Maze.PATH;
 import static edu.Project2.Maze.SPACE;
 
-@SuppressWarnings({"HideUtilityClassConstructor", "ReturnCount"})
+@SuppressWarnings({"HideUtilityClassConstructor", "ReturnCount", "MagicNumber"})
 public class DFSSolver {
     public final static String DFS = "dfs";
     public final static String COORDINATE_INCORRECT = "неверные координаты";
@@ -16,16 +16,15 @@ public class DFSSolver {
     private static int findX;
     private static int findY;
     private static boolean find = false;
-    private static boolean[][] seen;
-    private static BeautyOutput bo;
+    private static BeautyOutput beautyOutput;
 
-    public static List<int[]> getPath(char[][] matrixFromMaze, int x1, int y1, int x2, int y2, BeautyOutput BO)
+    public static List<int[]> getPath(char[][] matrixFromMaze, int x1, int y1, int x2, int y2, BeautyOutput bo)
         throws InterruptedException {
-        bo = BO;
+        beautyOutput = bo;
         matrix = matrixFromMaze;
         height = matrix.length;
         width = matrix[0].length;
-        seen = new boolean[height][width];
+        boolean[][] seen = new boolean[height][width];
         findX = x2;
         findY = y2;
         if (x1 < 1 || x2 < 1 || x1 >= width - 1 || x2 >= width - 1
@@ -69,15 +68,15 @@ public class DFSSolver {
 
             if (isValid(dx, dy) && matrix[dx][dy] == SPACE) {
                 matrix[dx][dy] = 'M';
-                if (bo != null) {
-                    bo.repaint();
+                if (beautyOutput != null) {
+                    beautyOutput.repaint();
                     Thread.sleep(20);
                 }
                 dfs(dx, dy);
                 if (find) {
                     matrix[x][y] = PATH;
-                    if (bo != null) {
-                        bo.repaint();
+                    if (beautyOutput != null) {
+                        beautyOutput.repaint();
                         Thread.sleep(20);
                     }
                     return;
