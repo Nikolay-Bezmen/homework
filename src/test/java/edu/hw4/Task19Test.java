@@ -1,18 +1,12 @@
 package edu.hw4;
 
 import jakarta.validation.ConstraintViolation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.Set;
 import static edu.hw4.Task19.Animal.Sex.M;
-import static edu.hw4.Task19.Animal.Type.BIRD;
-import static edu.hw4.Task19.Animal.Type.CAT;
-import static edu.hw4.Task19.Animal.Type.DOG;
-import static edu.hw4.Task19.Animal.Type.FISH;
-import static edu.hw4.Task19.Animal.Type.SPIDER;
+import static edu.hw4.Task19.Animal.Type.*;
 import static edu.hw4.Task19.Animal.deleteAnimals;
 import static edu.hw4.Task19.Animal.getErrorsCreate;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -20,8 +14,6 @@ import edu.hw4.Task19.Animal;
 
 
 public class Task19Test {
-    private final static Logger LOGGER = LogManager.getLogger();
-
     @Nested class check_age_valid{
         @Test
         void check_dog_invalid_age_validate(){

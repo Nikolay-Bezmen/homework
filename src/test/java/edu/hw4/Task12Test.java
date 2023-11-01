@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw4.Animal.Sex.F;
 import static edu.hw4.Animal.Sex.M;
@@ -23,7 +22,7 @@ public class Task12Test {
         Animal whole1 = new Animal("Vasiliy", FISH, M, 115, 1000, 30000, false);
         Animal whole2 = new Animal("Victor", FISH, M, 146, 9876, 24358, false);
         Animal digger = new Animal("Vasya", SPIDER, M, 8, 2, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog, cat, parrot, whole2, shark, digger, whole1));
+        List<Animal> zoo = List.of(dog, cat, parrot, whole2, shark, digger, whole1);
         Integer correctFilter = 3;
 
         Integer coutnOfFilter = getAnimalsWhichHaveWeightMoreTheirHeight(zoo);

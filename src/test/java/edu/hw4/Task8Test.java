@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw4.Animal.Sex.F;
 import static edu.hw4.Animal.Sex.M;
@@ -23,7 +22,7 @@ public class Task8Test {
         Animal parrot = new Animal("Kesha", BIRD, M, 4,20 , 1, false);
         Animal shark = new Animal("Baby", FISH, F, 115, 200, 300, true);
         Animal digger = new Animal("Vasya", SPIDER, M, 1, 2, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog, cat, parrot, shark, digger));
+        List<Animal> zoo = List.of(dog, cat, parrot, shark, digger);
         int k = 40;
 
         Animal resultAnimal = getMoreHeavyAnimalAmongAnimalLowerThanK(zoo, k);
@@ -38,7 +37,7 @@ public class Task8Test {
         Animal parrot = new Animal("Kesha", BIRD, M, 4,20 , 1, false);
         Animal shark = new Animal("Baby", FISH, F, 115, 200, 300, true);
         Animal digger = new Animal("Vasya", SPIDER, M, 1, 2, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog, cat, parrot, shark, digger));
+        List<Animal> zoo = List.of(dog, cat, parrot, shark, digger);
         int k = 2;
 
         var except = assertThrows(IndexOutOfBoundsException.class, () -> getMoreHeavyAnimalAmongAnimalLowerThanK(zoo, k));

@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static edu.hw4.Animal.Sex.F;
@@ -36,13 +35,13 @@ public class Task3Test {
         Animal shark6 = new Animal("Baby6", FISH, F, 115, 200, 300, true);
         Animal shark7 = new Animal("Baby7", FISH, F, 115, 200, 300, true);
         Animal digger1 = new Animal("Vasya", SPIDER, M, 1, 1, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(
+        List<Animal> zoo = List.of(
             dog1, dog2, dog3, dog4,
             cat1, cat2, cat3, cat4, cat5,
             parrot1, parrot2,
             shark1, shark2, shark3, shark4, shark5, shark6, shark7,
             digger1
-        ));
+        );
         Map<Animal.Type, Integer> correctGrouping = Map.of(
             DOG, 4,
             CAT, 5,
@@ -51,9 +50,7 @@ public class Task3Test {
             SPIDER, 1
         );
 
-
         Map<Animal.Type, Integer> resultOfGrouping = getCountAnimalEachOfType(zoo);
-
 
         assertThat(resultOfGrouping).isEqualTo(correctGrouping);
     }

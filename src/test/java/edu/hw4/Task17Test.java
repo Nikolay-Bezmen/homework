@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw4.Animal.Sex.F;
 import static edu.hw4.Animal.Sex.M;
@@ -32,13 +31,13 @@ public class Task17Test {
         Animal digger3 = new Animal("Vasya", SPIDER, M, 1, 1, 1, true);
         Animal digger4 = new Animal("Vasya", SPIDER, M, 1, 1, 1, false);
         Animal digger5 = new Animal("Vasya", SPIDER, M, 1, 1, 1, false);
-        List<Animal> zoo = new ArrayList<>(List.of(
+        List<Animal> zoo = List.of(
            dog1, dog2, dog3, dog4, dog5, dog6, dog7, dog8,
             cat,
             parrot,
             shark,
             digger1, digger2, digger3, digger4, digger5
-        ));
+        );
         //frequencyForDogs = 4/8 = 0.5;
         //frequencyForSpiders = 3/5 = 0.6
         // 0.6 > 0.5 => true
@@ -67,16 +66,16 @@ public class Task17Test {
         Animal digger3 = new Animal("Vasya", SPIDER, M, 1, 1, 1, false);
         Animal digger4 = new Animal("Vasya", SPIDER, M, 1, 1, 1, false);
         Animal digger5 = new Animal("Vasya", SPIDER, M, 1, 1, 1, false);
-        List<Animal> zoo = new ArrayList<>(List.of(
+        List<Animal> zoo = List.of(
             dog1, dog2, dog3, dog4, dog5, dog6, dog7, dog8,
             cat,
             parrot,
             shark,
             digger1, digger2, digger3, digger4, digger5
-        ));
+        );
         //frequencyForDogs = 4/8 = 0.5;
         //frequencyForSpiders = 2/5 = 0.4
-        // 0.6 > 0.5 => true
+        // 0.5 > 0.4 => true
         boolean correctResult = false;
 
         boolean resultOfWork = spidersBitesMoreOftenThanDogs(zoo);

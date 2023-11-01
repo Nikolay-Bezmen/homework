@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw4.Animal.Sex.F;
 import static edu.hw4.Animal.Sex.M;
@@ -26,9 +25,9 @@ public class Task13Test {
         Animal parrot2= new Animal("Kesha", BIRD, M, 4,20 , 1, false);
         Animal shark2 = new Animal("Baby Baby Baby", FISH, F, 115, 200, 300, true);
         Animal digger2 = new Animal("Vasya", SPIDER, M, 8, 2, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog1, cat1, parrot1, shark1, digger1,
-            dog2, cat2, parrot2, shark2, digger2));
-        List<Animal> correctFilter = new ArrayList<>(List.of(cat1, dog2, cat2, shark2));
+        List<Animal> zoo = List.of(dog1, cat1, parrot1, shark1, digger1,
+            dog2, cat2, parrot2, shark2, digger2);
+        List<Animal> correctFilter = List.of(cat1, dog2, cat2, shark2);
 
         List<Animal> resultOfFilter = getAnimalsWhichHaveMoreThanTwoWordName(zoo);
 

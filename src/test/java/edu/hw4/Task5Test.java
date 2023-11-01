@@ -36,18 +36,17 @@ public class Task5Test {
         Animal shark6 = new Animal("Baby6", FISH, F, 115, 200, 300, true);
         Animal shark7 = new Animal("Baby7", FISH, F, 115, 200, 300, true);
         Animal digger1 = new Animal("Vasya", SPIDER, M, 1, 1, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(
+        List<Animal> zoo = List.of(
             dog1, dog2, dog3, dog4,
             cat1, cat2, cat3, cat4, cat5,
             parrot1, parrot2,
             shark1, shark2, shark3, shark4, shark5, shark6, shark7,
             digger1
-        ));
-        Animal.Sex correctSex = F;
+        );
 
         Animal.Sex resultOfWork = getMorePopularSex(zoo);
 
-        assertThat(resultOfWork).isEqualTo(correctSex);
+        assertThat(resultOfWork).isEqualTo(F);
     }
 
     @Test

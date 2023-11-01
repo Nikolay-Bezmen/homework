@@ -3,7 +3,6 @@ package edu.hw4;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import static edu.hw4.Animal.Sex.F;
@@ -16,7 +15,7 @@ import static edu.hw4.Animal.Type.SPIDER;
 import static edu.hw4.Task11.getAnimalWhichCanBiteAndHaveHeightMoreOneMeter;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class Task11test {
+public class Task11Test {
     @ParameterizedTest
     @MethodSource("getAnimals")
     void test_filter_height_more_than_one_meter_and_can_not_bites(List<Animal> zoo, List<Animal> correctFilter){
@@ -34,10 +33,10 @@ public class Task11test {
         Animal digger1 = new Animal("Vasya", SPIDER, M, 8, 2, 1, true);
         Animal digger2 = new Animal("Masha", SPIDER, F, 7, 3, 1, false);
         return Stream.of(
-            Arguments.of(new ArrayList<>(List.of(dog, cat, parrot, shark1, digger1, digger2)),
-                new ArrayList<>()),
-            Arguments.of(new ArrayList<>(List.of(dog, cat, parrot, shark1, digger1, digger2, shark2)),
-                new ArrayList<>(List.of(shark2)))
+            Arguments.of(List.of(dog, cat, parrot, shark1, digger1, digger2),
+                List.of()),
+            Arguments.of(List.of(dog, cat, parrot, shark1, digger1, digger2, shark2),
+                List.of(shark2))
         );
     }
 

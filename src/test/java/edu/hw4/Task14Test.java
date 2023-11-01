@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw4.Animal.Sex.F;
 import static edu.hw4.Animal.Sex.M;
@@ -24,7 +23,7 @@ public class Task14Test {
         Animal dog3 = new Animal("Marik", DOG, M, 4, 100, 55, true);
         Animal digger = new Animal("Vasya", SPIDER, M, 8, 2, 1, true);
         Animal dog4 = new Animal("Tazik", DOG, M, 4, 100, 65, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog1, cat, parrot, dog2, shark, dog3, digger, dog4));
+        List<Animal> zoo = List.of(dog1, cat, parrot, dog2, shark, dog3, digger, dog4);
         int k = 60;
         boolean correctResult = true;
 
@@ -43,7 +42,7 @@ public class Task14Test {
         Animal dog3 = new Animal("Marik", DOG, M, 4, 100, 55, true);
         Animal digger = new Animal("Vasya", SPIDER, M, 8, 2, 1, true);
         Animal dog4 = new Animal("Tazik", DOG, M, 4, 100, 65, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog1, cat, parrot, dog2, shark, dog3, digger, dog4));
+        List<Animal> zoo = List.of(dog1, cat, parrot, dog2, shark, dog3, digger, dog4);
         int k = 110;
         boolean correctResult = false;
 

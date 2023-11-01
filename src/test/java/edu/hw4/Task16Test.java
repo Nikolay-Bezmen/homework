@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import static edu.hw4.Animal.Sex.F;
 import static edu.hw4.Animal.Sex.M;
@@ -26,17 +25,8 @@ public class Task16Test {
         Animal dog3 = new Animal("Masha", DOG, F, 19, 100, 55, true);
         Animal digger = new Animal("Vasya", SPIDER, M, 1, 2, 1, true);
         Animal dog4 = new Animal("Tazik", DOG, M, 5, 100, 65, true);
-        List<Animal> zoo = new ArrayList<>(List.of(dog1, cat, parrot, dog2, shark, dog3, digger, dog4));
-        List<Animal> correctResult = new ArrayList<>(List.of(
-            cat,
-            dog2,
-            dog1,
-            dog4,
-            dog3,
-            parrot,
-            shark,
-            digger
-        ));
+        List<Animal> zoo = List.of(dog1, cat, parrot, dog2, shark, dog3, digger, dog4);
+        List<Animal> correctResult = List.of(cat, dog2, dog1, dog4, dog3, parrot, shark, digger);
 
         List<Animal> resultOfWork = sortedByTypeThanBySexThanByName(zoo);
 

@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static edu.hw4.Animal.Sex.F;
@@ -36,13 +35,13 @@ public class Task6Test {
         Animal shark6 = new Animal("Baby6", FISH, F, 115, 200, 345, true);
         Animal shark7 = new Animal("Baby7", FISH, F, 115, 200, 458, true);
         Animal digger = new Animal("Vasya", SPIDER, M, 1, 1, 1, true);
-        List<Animal> zoo = new ArrayList<>(List.of(
+        List<Animal> zoo = List.of(
             dog1, dog2, dog3, dog4,
             cat1, cat2, cat3, cat4, cat5,
             parrot1, parrot2,
             shark1, shark2, shark3, shark4, shark5, shark6, shark7,
             digger
-        ));
+        );
         Map<Animal.Type, Animal> correctResult = Map.of(
             DOG, dog3,
             CAT, cat3,
