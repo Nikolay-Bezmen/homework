@@ -139,7 +139,7 @@ public class BFSSolverTest {
     @Test
     void test_find_path_bfs() throws InterruptedException {
         int[][] directions = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        Maze maze = new Maze(60, 30, OLDOS_BROADER_GENERATE);
+        Maze maze = new Maze(60, 30, OLDOS_BROADER_GENERATE, true);
         List<int[]> path = maze.getMinPath(1, 1, 31, 61, BFS);
         for (int i = 0; i < path.size() - 1; ++i) {
             int x = path.get(i)[0], y = path.get(i)[1];
@@ -156,6 +156,7 @@ public class BFSSolverTest {
             assertThat(cellsIsNeighbors).isTrue();
         }
 
+        maze.printMaze(2500);
         assertThat(path.get(path.size() - 1)[0]).isEqualTo(31);
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(61);
     }
@@ -165,7 +166,7 @@ public class BFSSolverTest {
     void throw_if_coordinates_is_not_correct(int x1, int y1, int x2, int y2) {
         var except = assertThrows(
             IllegalArgumentException.class,
-            () -> new Maze(30, 30, WILSON_GENERATE).getMinPath(x1, y1, x2, y2, DFS)
+            () -> new Maze(30, 30, WILSON_GENERATE, false).getMinPath(x1, y1, x2, y2, DFS)
         );
         assertThat(except.getMessage()).isEqualTo(COORDINATE_INCORRECT);
     }

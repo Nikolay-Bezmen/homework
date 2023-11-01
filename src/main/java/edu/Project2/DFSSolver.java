@@ -17,9 +17,11 @@ public class DFSSolver {
     private static int findY;
     private static boolean find = false;
     private static boolean[][] seen;
+    private static BeautyOutput bo;
 
-    public static List<int[]> getPath(char[][] matrixFromMaze, int x1, int y1, int x2, int y2)
+    public static List<int[]> getPath(char[][] matrixFromMaze, int x1, int y1, int x2, int y2, BeautyOutput BO)
         throws InterruptedException {
+        bo = BO;
         matrix = matrixFromMaze;
         height = matrix.length;
         width = matrix[0].length;
@@ -32,7 +34,6 @@ public class DFSSolver {
         }
         dfs(x1, y1);
 
-        matrixFromMaze = matrix;
         List<int[]> path = new ArrayList<>();
         int currX = x1;
         int currY = y1;
@@ -55,7 +56,7 @@ public class DFSSolver {
         return path;
     }
 
-    private static void dfs(int x, int y) {
+    private static void dfs(int x, int y) throws InterruptedException {
         if (y == findX && x == findY) {
             find = true;
             matrix[x][y] = PATH;
@@ -68,9 +69,17 @@ public class DFSSolver {
 
             if (isValid(dx, dy) && matrix[dx][dy] == SPACE) {
                 matrix[dx][dy] = 'M';
+                if (bo != null) {
+                    bo.repaint();
+                    Thread.sleep(20);
+                }
                 dfs(dx, dy);
                 if (find) {
                     matrix[x][y] = PATH;
+                    if (bo != null) {
+                        bo.repaint();
+                        Thread.sleep(20);
+                    }
                     return;
                 }
             }

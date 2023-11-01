@@ -15,10 +15,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DFSSolverTest {
+    Maze maze;
     @Test
     void test_find_path_dfs() throws InterruptedException {
         int[][] directions = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        Maze maze = new Maze(60, 30, WILSON_GENERATE);
+        maze = new Maze(60, 30, WILSON_GENERATE, true);
         List<int[]> path = maze.getMinPath(1, 1, 31, 61, DFS);
         for (int i = 0; i < path.size() - 1; ++i) {
             int x = path.get(i)[0], y = path.get(i)[1];
@@ -34,17 +35,18 @@ public class DFSSolverTest {
 
             assertThat(cellsIsNeighbors).isTrue();
         }
-
+        maze.printMaze(2500);
         assertThat(path.get(path.size() - 1)[0]).isEqualTo(61);
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(31);
     }
 
     @ParameterizedTest
     @MethodSource("getInvalidCoordinatesForDFS")
-    void throw_if_coordinates_is_not_correct(int x1, int y1, int x2, int y2) {
+    void throw_if_coordinates_is_not_correct(int x1, int y1, int x2, int y2) throws InterruptedException {
+        maze = new Maze(30, 30, OLDOS_BROADER_GENERATE, false);
         var except = assertThrows(
             IllegalArgumentException.class,
-            () -> new Maze(30, 30, OLDOS_BROADER_GENERATE).getMinPath(x1, y1, x2, y2, DFS)
+            () -> maze.getMinPath(x1, y1, x2, y2, DFS)
         );
         assertThat(except.getMessage()).isEqualTo(COORDINATE_INCORRECT);
     }
