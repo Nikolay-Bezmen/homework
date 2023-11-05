@@ -1,12 +1,13 @@
 package edu.project1.GameSession;
 
 import java.util.List;
+import java.util.Random;
 
 public class Dictionary {
     private static final List<String> SET_WORD = List.of("banana", "chocolate", "coffee", "apple", "horse");
-
+    private final static Random random = new Random();
     public static String getRandomWord() {
-        int indexOfRandomAccess = (int) System.currentTimeMillis() % (SET_WORD.size());
+        int indexOfRandomAccess = random.nextInt(SET_WORD.size());
         return SET_WORD.get(indexOfRandomAccess);
     }
 
