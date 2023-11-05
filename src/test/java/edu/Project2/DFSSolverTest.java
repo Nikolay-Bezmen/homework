@@ -23,6 +23,7 @@ public class DFSSolverTest {
         int[][] directions = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
         maze = new Maze(60, 30, WILSON_GENERATE, true);
         List<int[]> path = maze.getMinPath(1, 1, 31, 61, DFS);
+
         for (int i = 0; i < path.size() - 1; ++i) {
             int x = path.get(i)[0], y = path.get(i)[1];
             int nextX = path.get(i + 1)[0], nextY = path.get(i + 1)[1];
