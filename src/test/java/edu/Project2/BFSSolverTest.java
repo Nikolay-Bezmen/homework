@@ -170,6 +170,7 @@ public class BFSSolverTest {
             IllegalArgumentException.class,
             () -> new Maze(30, 30, WILSON_GENERATE, false).getMinPath(x1, y1, x2, y2, DFS)
         );
+
         assertThat(except.getMessage()).isEqualTo(COORDINATE_INCORRECT);
     }
 
