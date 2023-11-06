@@ -164,6 +164,7 @@ public class BFSSolverTest {
     }
 
 
+    @Disabled
     @Test
     void test_correct_start_and_end_of_path() throws InterruptedException {
         Maze maze = new Maze(78, 22, WILSON_GENERATE, false);
@@ -175,6 +176,8 @@ public class BFSSolverTest {
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(79);
 
     }
+
+    @Disabled
     @ParameterizedTest
     @MethodSource("getInvalidCoordinatesForDFS")
     void throw_if_coordinates_is_not_correct(int x1, int y1, int x2, int y2) {

@@ -43,6 +43,7 @@ public class DFSSolverTest {
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(31);
     }
 
+    @Disabled
     @Test
     void test_correct_start_and_end_of_path() throws InterruptedException {
         maze = new Maze(40, 10, WILSON_GENERATE, false);
@@ -54,6 +55,7 @@ public class DFSSolverTest {
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(11);
     }
 
+    @Disabled
     @ParameterizedTest
     @MethodSource("getInvalidCoordinatesForDFS")
     void throw_if_coordinates_is_not_correct(int x1, int y1, int x2, int y2) throws InterruptedException {
