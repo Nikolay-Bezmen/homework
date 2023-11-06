@@ -15,9 +15,9 @@ import static edu.Project2.WilsonGenerate.WILSON_GENERATE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Disabled
 public class DFSSolverTest {
     Maze maze;
+    @Disabled
     @Test
     void test_find_path_dfs() throws InterruptedException {
         int[][] directions = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
@@ -41,6 +41,17 @@ public class DFSSolverTest {
         maze.printMaze(2500);
         assertThat(path.get(path.size() - 1)[0]).isEqualTo(61);
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(31);
+    }
+
+    @Test
+    void test_correct_start_and_end_of_path() throws InterruptedException {
+        maze = new Maze(40, 10, WILSON_GENERATE, false);
+        List<int[]> path = maze.getMinPath(1, 1, 11, 41, DFS);
+
+        assertThat(path.get(0)[0]).isEqualTo(1);
+        assertThat(path.get(0)[1]).isEqualTo(1);
+        assertThat(path.get(path.size() - 1)[0]).isEqualTo(41);
+        assertThat(path.get(path.size() - 1)[1]).isEqualTo(11);
     }
 
     @ParameterizedTest

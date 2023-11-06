@@ -15,7 +15,6 @@ import static edu.Project2.WilsonGenerate.WILSON_GENERATE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Disabled
 public class BFSSolverTest {
     private final char[][] matrix = {
         {497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497, 497,
@@ -138,6 +137,7 @@ public class BFSSolverTest {
         }
     }
 
+    @Disabled
     @Test
     void test_find_path_bfs() throws InterruptedException {
         int[][] directions = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
@@ -163,6 +163,18 @@ public class BFSSolverTest {
         assertThat(path.get(path.size() - 1)[1]).isEqualTo(61);
     }
 
+
+    @Test
+    void test_correct_start_and_end_of_path() throws InterruptedException {
+        Maze maze = new Maze(78, 22, WILSON_GENERATE, false);
+        List<int[]> path = maze.getMinPath(1, 1, 23, 79, BFS);
+
+        assertThat(path.get(0)[0]).isEqualTo(1);
+        assertThat(path.get(0)[1]).isEqualTo(1);
+        assertThat(path.get(path.size() - 1)[0]).isEqualTo(23);
+        assertThat(path.get(path.size() - 1)[1]).isEqualTo(79);
+
+    }
     @ParameterizedTest
     @MethodSource("getInvalidCoordinatesForDFS")
     void throw_if_coordinates_is_not_correct(int x1, int y1, int x2, int y2) {

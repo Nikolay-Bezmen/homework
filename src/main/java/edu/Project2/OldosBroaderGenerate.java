@@ -69,7 +69,7 @@ public class OldosBroaderGenerate implements Generator {
 
     private int getRandomDirection(boolean[] randomSeen) {
         while (true) {
-            int rand = Math.abs(Math.abs(new Random().nextInt()) % 4);
+            int rand = Math.abs(new Random().nextInt()) % 4;
             if (randomSeen[rand]) {
                 continue;
             }
