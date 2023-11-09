@@ -11,6 +11,23 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
     @ParameterizedTest
+    @MethodSource("getLocalDates")
+    void check_on_correct_dates_of_friday_thirteen(LocalDate date, LocalDate correctDates){
+        LocalDate resultOfCalculate = findAllFridayThirteenOnYear(date);
+
+        assertThat(resultOfCalculate).isEqualTo(correctDates);
+    }
+
+    private static Stream<Arguments> getLocalDates(){
+        return Stream.of(
+            Arguments.of(LocalDate.of(1999, 1, 17), LocalDate.of(1999, 8, 13)),
+            Arguments.of(LocalDate.of(1973, 4, 13), LocalDate.of(1973, 4, 13)),
+            Arguments.of(LocalDate.of(1924, 5, 2), LocalDate.of(1924, 6, 13)),
+            Arguments.of(LocalDate.of(2015, 1, 1), LocalDate.of(2015, 2, 13))
+        );
+    }
+
+    @ParameterizedTest
     @MethodSource("getYears")
     void check_on_correct_dates_of_friday_thirteen(Integer year, List<LocalDate> correctDates){
         List<LocalDate> resultOfCalculate = findAllFridayThirteenOnYear(year);
