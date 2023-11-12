@@ -15,12 +15,12 @@ public class Task1 {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
     private static String sessionRegex =
         "^(\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2}) - (\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2})$";
-    private static final Pattern PATTERN = Pattern.compile(sessionRegex);
+    private static Pattern pattern = Pattern.compile(sessionRegex);
 
     public static String averageTimeOfOneSession(String[] sessions) {
         List<Long> timeOfSessions = new ArrayList<>();
         for (String session : sessions) {
-            Matcher matcher = PATTERN.matcher(session);
+            Matcher matcher = pattern.matcher(session);
 
             if (matcher.matches()) {
                 try {
