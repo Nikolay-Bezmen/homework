@@ -18,10 +18,10 @@ public class Task3 {
         DateTimeFormatter.ofPattern("M/d/yy")
     };
 
-    public static Optional<LocalDate> parseDate(String string) {
+    public static Optional<LocalDate> parseDate(String dateFormat) {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
-                LocalDate date = LocalDate.parse(string, formatter);
+                LocalDate date = LocalDate.parse(dateFormat, formatter);
                 return Optional.of(date);
             } catch (Exception ignored) {
             }
@@ -29,7 +29,7 @@ public class Task3 {
 
         LocalDate today = LocalDate.now();
 
-        switch (string) {
+        switch (dateFormat) {
             case YESTERDAY -> {
                 return Optional.of(today.minusDays(1));
             }
@@ -44,7 +44,7 @@ public class Task3 {
         }
 
         Pattern pattern = Pattern.compile("^(\\d+) days? ago$");
-        Matcher matcher = pattern.matcher(string);
+        Matcher matcher = pattern.matcher(dateFormat);
 
         if (matcher.matches()) {
             return Optional.of(today.minusDays(Integer.parseInt(matcher.group(1))));

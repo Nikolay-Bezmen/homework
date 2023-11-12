@@ -12,15 +12,15 @@ import java.util.regex.Pattern;
 public class Task1 {
     public final static String INCORRECT_FORMAT = "incorrect format";
     public final static String INCORRECT_DATE = "so date is not exist";
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
+    private static String sessionRegex =
+        "^(\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2}) - (\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2})$";
+    private static final Pattern PATTERN = Pattern.compile(sessionRegex);
 
     public static String averageTimeOfOneSession(String[] sessions) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
-        String sessionRegex = "^(\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2}) - (\\d{4}-\\d{2}-\\d{2}, \\d{2}:\\d{2})$";
-
-        Pattern pattern = Pattern.compile(sessionRegex);
         List<Long> timeOfSessions = new ArrayList<>();
         for (String session : sessions) {
-            Matcher matcher = pattern.matcher(session);
+            Matcher matcher = PATTERN.matcher(session);
 
             if (matcher.matches()) {
                 try {

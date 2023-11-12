@@ -1,5 +1,6 @@
 package edu.hw5;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.LinkedList;
@@ -7,8 +8,6 @@ import java.util.List;
 
 @SuppressWarnings({"HideUtilityClassConstructor", "MagicNumber"})
 public class Task2 {
-    private final static String FRIDAY = "FRIDAY";
-
     public static LocalDate findAllFridayThirteenOnYear(LocalDate localDate) {
         LocalDate date;
         if (localDate.getDayOfMonth() <= 13) {
@@ -18,7 +17,7 @@ public class Task2 {
         }
 
         while (true) {
-            if (date.getDayOfWeek().toString().equals(FRIDAY)) {
+            if (date.getDayOfWeek() == DayOfWeek.FRIDAY) {
                 return date;
             }
             date = date.with(TemporalAdjusters.firstDayOfNextMonth()).withDayOfMonth(13);
@@ -29,7 +28,7 @@ public class Task2 {
         List<LocalDate> fridayThirteen = new LinkedList<>();
         LocalDate date = LocalDate.of(year, 1, 13);
         while (date.getYear() == year) {
-            if (date.getDayOfWeek().toString().equals(FRIDAY)) {
+            if (date.getDayOfWeek() == DayOfWeek.FRIDAY) {
                 fridayThirteen.add(date);
             }
 
