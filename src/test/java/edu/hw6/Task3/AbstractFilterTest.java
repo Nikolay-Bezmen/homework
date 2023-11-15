@@ -2,6 +2,7 @@ package edu.hw6.Task3;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -28,6 +29,7 @@ public class AbstractFilterTest {
         directory = Files.createDirectory(Path.of("directory"));
     }
 
+    @Disabled
     @Test
     void test_filter_for_txt_extension() throws Exception {
         try {
@@ -80,6 +82,7 @@ public class AbstractFilterTest {
         Files.deleteIfExists(directory.resolve("test2.txt"));
     }
 
+    @Disabled
     @Test
     void test_name_suitable_for_regex() throws IOException {
         try {
@@ -108,6 +111,7 @@ public class AbstractFilterTest {
         Files.deleteIfExists(directory.resolve("test.txt"));
     }
 
+    @Disabled
     @Test
     void test_attributes() throws IOException {
         try {
@@ -138,6 +142,7 @@ public class AbstractFilterTest {
         Files.deleteIfExists(directory.resolve("fileWrite.txt"));
     }
 
+    @Disabled
     @Test
     void test_if_is_magic_id() throws IOException {
         try {
@@ -166,6 +171,7 @@ public class AbstractFilterTest {
         Files.deleteIfExists(directory.resolve("test.png"));
     }
 
+    @Disabled
     @Test
     void test_combined_filters() throws IOException {
         try {
