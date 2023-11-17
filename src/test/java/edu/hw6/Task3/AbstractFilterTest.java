@@ -11,11 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static edu.hw6.Task3.AbstractFilter.EXECUTABLE;
-import static edu.hw6.Task3.AbstractFilter.READABLE;
 import static edu.hw6.Task3.AbstractFilter.extension;
 import static edu.hw6.Task3.AbstractFilter.largerThan;
 import static edu.hw6.Task3.AbstractFilter.magicNumber;
@@ -80,66 +77,6 @@ public class AbstractFilterTest {
 
         Files.deleteIfExists(directory.resolve("test1.txt"));
         Files.deleteIfExists(directory.resolve("test2.txt"));
-    }
-
-    @Disabled
-    @Test
-    void test_name_suitable_for_regex() throws IOException {
-        try {
-            Files.createFile(directory.resolve("tinkoff.txt"));
-            Files.createFile(directory.resolve("test.txt"));
-            String regex = "tinkoff";
-
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory, regexNamePattern(regex))) {
-                int countCorrectFiles = 0;
-                Pattern pattern = Pattern.compile(regex);
-                for (Path entry : stream) {
-                    ++countCorrectFiles;
-                    Matcher matcher = pattern.matcher(entry.toString());
-                    assertThat(matcher.find()).isTrue();
-                }
-
-                assertThat(countCorrectFiles).isEqualTo(1);
-            }
-        } catch (Exception e) {
-            Files.deleteIfExists(directory.resolve("tinkoff.txt"));
-            Files.deleteIfExists(directory.resolve("test.txt"));
-            Files.deleteIfExists(directory);
-        }
-
-        Files.deleteIfExists(directory.resolve("tinkoff.txt"));
-        Files.deleteIfExists(directory.resolve("test.txt"));
-    }
-
-    @Disabled
-    @Test
-    void test_attributes() throws IOException {
-        try {
-            Set<PosixFilePermission> permissionsForWrite = new HashSet<>();
-            permissionsForWrite.add(PosixFilePermission.OTHERS_WRITE);
-            Set<PosixFilePermission> permissionsForRead = new HashSet<>();
-            permissionsForRead.add(PosixFilePermission.OTHERS_READ);
-            Path pathToFileForRead = Files.createFile(directory.resolve("fileRead.txt"));
-            Path pathToFileForWrite = Files.createFile(directory.resolve("fileWrite.txt"));
-            Files.setPosixFilePermissions(pathToFileForWrite, permissionsForWrite);
-            Files.setPosixFilePermissions(pathToFileForRead, permissionsForRead);
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(directory, READABLE)) {
-                int countCorrectFiles = 0;
-
-                for (Path entry : stream) {
-                    ++countCorrectFiles;
-                    assertThat(READABLE.accept(entry)).isTrue();
-                }
-
-                assertThat(countCorrectFiles).isEqualTo(1);
-            }
-        } catch (Exception e) {
-            Files.deleteIfExists(directory.resolve("fileRead.txt"));
-            Files.deleteIfExists(directory.resolve("fileWrite.txt"));
-            Files.deleteIfExists(directory);
-        }
-        Files.deleteIfExists(directory.resolve("fileRead.txt"));
-        Files.deleteIfExists(directory.resolve("fileWrite.txt"));
     }
 
     @Disabled
