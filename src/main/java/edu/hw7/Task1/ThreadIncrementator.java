@@ -3,18 +3,18 @@ package edu.hw7.Task1;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadIncrementator implements Runnable {
-    private final AtomicInteger COUNTER;
+    private final AtomicInteger counter;
 
     ThreadIncrementator() {
-        COUNTER = new AtomicInteger(0);
+        counter = new AtomicInteger(0);
     }
 
     private void increment() {
-        COUNTER.incrementAndGet();
+        counter.incrementAndGet();
     }
 
     public int getCounter() {
-        return COUNTER.get();
+        return counter.get();
     }
 
     @Override
