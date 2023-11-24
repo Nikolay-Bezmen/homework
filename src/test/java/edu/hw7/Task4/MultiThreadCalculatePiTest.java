@@ -1,12 +1,16 @@
 package edu.hw7.Task4;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MultiThreadCalculatePiTest {
     private static final long COUNT_SIMULATION = 1_000_000_000L;
     private static final int COUNT_THREADS = 8;
-    MultiThreadCalculatingPi PI_CALCULATOR = new MultiThreadCalculatingPi();
+    static MultiThreadCalculatingPi PI_CALCULATOR;
+    @BeforeEach void setup(){
+        PI_CALCULATOR = new MultiThreadCalculatingPi();
+    }
 
     @Test
     void test_that_if_simulation_strives_to_inf_then_delta_strives_to_zero(){
