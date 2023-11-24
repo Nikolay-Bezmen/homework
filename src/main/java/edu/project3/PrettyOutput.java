@@ -74,6 +74,7 @@ public class PrettyOutput {
         sb.append(getTitle("Общая информация"));
         sb.append(String.format(formatter, StringUtils.center("Метрика", 30), "Значение"));
         sb.append(separatorLine);
+
         if (logAnalysis.getUriPath() == null) {
             String path = logAnalysis.getPathToLogFile();
             if (path.endsWith(".txt")) {
@@ -82,21 +83,7 @@ public class PrettyOutput {
                     String.format("'%s'", fileName)
                 ));
             } else {
-                File[] files = new File(path).listFiles();
-                if (files != null) {
-                    for (int i = 0; i < files.length; ++i) {
-                        String name = files[i].getName();
-                        if (name.endsWith(".txt")) {
-                            sb.append(String.format(
-                                formatter,
-                                StringUtils.center(String.format("Файл - %d", i + 1), 30),
-                                String.format("'%s'", name)
-                            ));
-                        }
-                    }
-                } else {
-                    sb.append(String.format(formatter, StringUtils.center("Файл(-ы)", 30), "-"));
-                }
+                sb.append(getAllTxtFilesFromDirectory(path, formatter));
             }
         } else {
             sb.append(String.format(formatter, StringUtils.center("Файл(-ы)", 30), "-"));
@@ -105,6 +92,7 @@ public class PrettyOutput {
         sb.append(String.format(formatter, StringUtils.center("Начальная дата", 30),
             from == null ? "-" : from
         ));
+
         sb.append(String.format(formatter, StringUtils.center("Конечная дата", 30),
             to == null ? "-" : to
         ));
@@ -141,6 +129,27 @@ public class PrettyOutput {
             sb.append("|===\n");
         }
 
+
+        return sb.toString();
+    }
+
+    private String getAllTxtFilesFromDirectory(String path, String formatter) {
+        StringBuilder sb = new StringBuilder();
+        File[] files = new File(path).listFiles();
+        if (files != null) {
+            for (int i = 0; i < files.length; ++i) {
+                String name = files[i].getName();
+                if (name.endsWith(".txt")) {
+                    sb.append(String.format(
+                        formatter,
+                        StringUtils.center(String.format("Файл - %d", i + 1), 30),
+                        String.format("'%s'", name)
+                    ));
+                }
+            }
+        } else {
+            sb.append(String.format(formatter, StringUtils.center("Файл(-ы)", 30), "-"));
+        }
 
         return sb.toString();
     }
@@ -194,9 +203,7 @@ public class PrettyOutput {
                 return s;
             }
             StringBuilder sb = new StringBuilder(size);
-            for (int i = 0; i < (size - s.length()) / 2; i++) {
-                sb.append(pad);
-            }
+            sb.append(String.valueOf(pad).repeat((size - s.length()) / 2));
             sb.append(s);
             while (sb.length() < size) {
                 sb.append(pad);
@@ -219,9 +226,7 @@ public class PrettyOutput {
             sb.append("|");
             for (int column : columns) {
                 sb.append(":");
-                for (int i = 0; i < column; ++i) {
-                    sb.append("-");
-                }
+                sb.append("-".repeat(Math.max(0, column)));
                 sb.append(":").append("|");
             }
             sb.append("\n");

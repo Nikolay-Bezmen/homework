@@ -18,39 +18,33 @@ public class Main {
             ++i;
         }
 
-        if (i + 1 < n && args[i].equals("--path")) {
-            String p = args[i + 1].trim();
-            if (p.startsWith("http")) {
-                uri = p;
-            } else {
-                if (p.endsWith("*")) {
-                    pathToLogFile = p.substring(0, p.length() - 1);
-                } else {
-                    pathToLogFile = p;
+        while (i < args.length - 1) {
+            switch (args[i]) {
+                case "--path" -> {
+                    String arg = args[i + 1].trim();
+                    if (arg.startsWith("http")) {
+                        uri = arg;
+                    } else {
+                        pathToLogFile = arg.endsWith("*") ? arg.substring(0, arg.length() - 1) : arg;
+                    }
+                    ++i;
                 }
+                case "--from" -> {
+                    from = processDate(args[i + 1].trim().split("-"));
+                    ++i;
+                }
+                case "--to" -> {
+                    to = processDate(args[i + 1].trim().split("-"));
+                    ++i;
+                }
+                case "--format" -> {
+                    patternFile = args[i + 1].trim();
+                    ++i;
+                }
+                default -> { }
             }
             ++i;
-            ++i;
         }
-
-        if (i + 1 < n && args[i].equals("--from")) {
-            String[] date = args[i + 1].trim().split("-");
-            from = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
-            ++i;
-            ++i;
-        }
-
-        if (i + 1 < n && args[i].equals("--to")) {
-            String[] date = args[i + 1].trim().split("-");
-            to = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
-            ++i;
-            ++i;
-        }
-
-        if (i + 1 < n && args[i].equals("--format")) {
-            patternFile = args[i + 1].trim();
-        }
-
         LogAnalysis logAnalysis = new LogAnalysis(from,
             to, patternFile, uri,
             pathToLogFile
@@ -59,5 +53,11 @@ public class Main {
         LogReport logReport =
             new LogReport(logAnalysis);
         logReport.getReport();
+    }
+
+    private static LocalDate processDate(String[] dateLine) {
+        return LocalDate.of(Integer.parseInt(dateLine[0]),
+            Integer.parseInt(dateLine[1]), Integer.parseInt(dateLine[2])
+        );
     }
 }
