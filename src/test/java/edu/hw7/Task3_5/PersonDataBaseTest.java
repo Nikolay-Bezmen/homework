@@ -1,4 +1,4 @@
-package edu.hw7.Task3;
+package edu.hw7.Task3_5;
 
 import edu.hw7.Person;
 import org.junit.jupiter.api.Test;
@@ -16,9 +16,9 @@ public class PersonDataBaseTest {
 
         IntStream.range(1,1000).forEach(i -> executor.submit(() ->
             personDataBase.add(new Person(i,
-                        "name" + i,
-                        "address" + i,
-                        "888888888" + i))));
+                "name" + i,
+                "address" + i,
+                "888888888" + i))));
 
         executor.shutdown();
         executor.awaitTermination(1, TimeUnit.MINUTES);
