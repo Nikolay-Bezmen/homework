@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import org.apache.logging.log4j.core.util.KeyValuePair;
 
-@SuppressWarnings({"MagicNumber", "MultipleStringLiterals", "InnerTypeLast", "NestedIfDepth"})
+@SuppressWarnings({"MagicNumber", "MultipleStringLiterals", "InnerTypeLast"})
 public class PrettyOutput {
     private final boolean isMarkdownFile;
 
@@ -129,7 +129,6 @@ public class PrettyOutput {
             sb.append("|===\n");
         }
 
-
         return sb.toString();
     }
 
@@ -137,21 +136,29 @@ public class PrettyOutput {
         StringBuilder sb = new StringBuilder();
         File[] files = new File(path).listFiles();
         if (files != null) {
-            for (int i = 0; i < files.length; ++i) {
-                String name = files[i].getName();
-                if (name.endsWith(".txt")) {
-                    sb.append(String.format(
-                        formatter,
-                        StringUtils.center(String.format("Файл - %d", i + 1), 30),
-                        String.format("'%s'", name)
-                    ));
-                }
-            }
+            sb.append(getAllFilesFromDirectoryInSuitableFormat(files, formatter));
         } else {
             sb.append(String.format(formatter, StringUtils.center("Файл(-ы)", 30), "-"));
         }
 
         return sb.toString();
+    }
+
+    private StringBuilder getAllFilesFromDirectoryInSuitableFormat(File[] files, String formatter) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < files.length; ++i) {
+            String name = files[i].getName();
+            if (name.endsWith(".txt")) {
+                sb.append(String.format(
+                    formatter,
+                    StringUtils.center(String.format("Файл - %d", i + 1), 30),
+                    String.format("'%s'", name)
+                ));
+            }
+        }
+
+        return sb;
     }
 
     public String printResourcesWithMostPopularCodeError404(List<KeyValuePair> list) {

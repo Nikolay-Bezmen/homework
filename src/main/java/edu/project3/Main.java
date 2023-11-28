@@ -45,6 +45,7 @@ public class Main {
             }
             ++i;
         }
+
         LogAnalysis logAnalysis = new LogAnalysis(from,
             to, patternFile, uri,
             pathToLogFile
