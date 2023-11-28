@@ -1,13 +1,11 @@
 package edu.project3;
 
-
-import org.springframework.http.HttpStatus;
+import org.apache.commons.httpclient.HttpStatus;
 
 public class HttpAnswersMap {
     public String getMessageFromCode(int code) {
         try {
-            HttpStatus status = HttpStatus.resolve(code);
-            return status != null ? status.getReasonPhrase() : null;
+            return HttpStatus.getStatusText(code);
         } catch (IllegalArgumentException e) {
             return null;
         }
