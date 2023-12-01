@@ -17,7 +17,6 @@ public class MultiCrackPassword {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
     static final int BASE = 36;
-    private static final int COUNT_THREAD = Runtime.getRuntime().availableProcessors();
     private static final int MAX_PASSWORD_LENGTH = 4;
     private static final ConcurrentMap<String, String> MAP = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> CRACK_MAP = new ConcurrentHashMap<>();
@@ -26,7 +25,7 @@ public class MultiCrackPassword {
     }
 
     public static void crackPassword(int lengthOfPassword) throws InterruptedException {
-        ExecutorService executer = Executors.newFixedThreadPool(COUNT_THREAD);
+        ExecutorService executer = Executors.newWorkStealingPool();
 
         for (int i = 0; i < 36; ++i) {
             int finalI = i;

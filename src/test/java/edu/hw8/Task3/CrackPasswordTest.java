@@ -88,11 +88,11 @@ public class CrackPasswordTest {
         MultiCrackPassword.startCracking(new HashMap<>(), -1);
         long multiProcessTime = System.currentTimeMillis() - startMulti;
 
-        long singleStart = System.currentTimeMillis();
+        long startSingle = System.currentTimeMillis();
         SingleCrackPassword.startCracking(new HashMap<>(), -1);
-        long singleStartTime = System.currentTimeMillis() - singleStart;
+        long singleProcessTime = System.currentTimeMillis() - startSingle;
 
-        assertThat(multiProcessTime).isLessThan(singleStartTime);
+        assertThat(multiProcessTime).isLessThan(singleProcessTime);
 
     }
 }
