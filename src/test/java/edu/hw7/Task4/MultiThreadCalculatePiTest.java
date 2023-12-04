@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MultiThreadCalculatePiTest {
     private static final long COUNT_SIMULATION = 1_000_000_000L;
-    private static final long COUNT_SIMULATION_FOR_COMPARE_SPEED = 10_000_000;
+    private static final long COUNT_SIMULATION_FOR_COMPARE_SPEED = 100_000_000;
     private static final int COUNT_THREADS = 8;
     static MultiThreadCalculatingPi PI_CALCULATOR;
     @BeforeEach void setup(){
