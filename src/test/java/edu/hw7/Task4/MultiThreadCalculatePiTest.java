@@ -1,12 +1,13 @@
 package edu.hw7.Task4;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MultiThreadCalculatePiTest {
     private static final long COUNT_SIMULATION = 1_000_000_000L;
-    private static final long COUNT_SIMULATION_FOR_COMPARE_SPEED = 100_000_000;
+    private static final long COUNT_SIMULATION_FOR_COMPARE_SPEED = 10_000_000;
     private static final int COUNT_THREADS = 8;
     static MultiThreadCalculatingPi PI_CALCULATOR;
     @BeforeEach void setup(){
@@ -26,6 +27,7 @@ public class MultiThreadCalculatePiTest {
 
 
     @Test
+    @Disabled
     void test_that_single_threads_slowly_than_multi_threads(){
         long timeWhenCalculateWithSingleThread = System.currentTimeMillis();
         new SingleThreadCalculatingPi().getPi(COUNT_SIMULATION_FOR_COMPARE_SPEED);

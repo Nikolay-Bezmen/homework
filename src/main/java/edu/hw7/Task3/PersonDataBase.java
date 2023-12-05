@@ -1,13 +1,13 @@
 package edu.hw7.Task3;
 
 import edu.hw7.Person;
-import edu.hw7.PersonDataBaseInterFace;
+import edu.hw7.PersonDataBaseInterface;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PersonDataBase implements PersonDataBaseInterFace {
+public class PersonDataBase implements PersonDataBaseInterface {
     private final static Map<Integer, Person> ID_TO_PERSON = new HashMap<>();
     private final static Map<String, List<Person>> NAME_TO_LIST_PERSON = new HashMap<>();
     private final static Map<String, List<Person>> ADDRESS_TO_LIST_PERSON = new HashMap<>();
