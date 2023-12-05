@@ -1,4 +1,4 @@
-package edu.hw9;
+package edu.hw9.Task1;
 
 @SuppressWarnings("EqualsHashCode")
 public record MetricStats(String metricName, double sum, double average, double min, double max) {

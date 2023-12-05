@@ -1,7 +1,5 @@
 package edu.hw9.Task1;
 
-import edu.hw9.MetricStats;
-import edu.hw9.StatisticsCollector;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
