@@ -10,8 +10,7 @@ public class FileUtils {
 
     public static List<File> findDirectories(File file, int countSubDirectories) {
         try (ForkJoinPool fjp = new ForkJoinPool()) {
-            return fjp.invoke(new DirectorySearchCounter(file, countSubDirectories))
-                .getDirectories();
+            return fjp.invoke(new DirectorySearchCounter(file, countSubDirectories)).getDirectories();
         }
     }
 
