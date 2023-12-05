@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class FileSearchByPredicatesTest {
-    private static final File mainDirectory = new File("src/test/java/edu/hw9/task2/mainDir");
+    private static final File mainDirectory = new File("mainDir");
     private static final String TXT_EXTENSION = ".txt";
     @BeforeAll static void prepareDirectoryAndFilesForTests() throws IOException {
         mainDirectory.mkdir();

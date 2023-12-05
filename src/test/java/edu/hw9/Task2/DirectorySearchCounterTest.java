@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DirectorySearchCounterTest {
-    private static final File mainDirectory = new File("src/test/java/edu/hw9/task2/mainDir");
+    private static final File mainDirectory = new File("mainDir");
     @BeforeAll static void prepareDirectoryAndFilesForTests() throws IOException {
         mainDirectory.mkdir();
         File[] files = new File[5];
