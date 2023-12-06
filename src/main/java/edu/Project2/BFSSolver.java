@@ -48,6 +48,7 @@ public class BFSSolver {
             int[] currDot = currPath.get(currPath.size() - 1);
             int x = currDot[0];
             int y = currDot[1];
+
             for (int[] pathDirection : PATH_DIRECTIONS) {
                 int dx = x + pathDirection[0];
                 int dy = y + pathDirection[1];
