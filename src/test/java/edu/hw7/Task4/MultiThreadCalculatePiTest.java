@@ -26,8 +26,8 @@ public class MultiThreadCalculatePiTest {
     }
 
 
-    @Test
     @Disabled
+    @Test
     void test_that_single_threads_slowly_than_multi_threads(){
         long timeWhenCalculateWithSingleThread = System.currentTimeMillis();
         new SingleThreadCalculatingPi().getPi(COUNT_SIMULATION_FOR_COMPARE_SPEED);
