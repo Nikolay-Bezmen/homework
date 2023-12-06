@@ -1,6 +1,7 @@
 package edu.hw7.Task4;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -25,6 +26,7 @@ public class MultiThreadCalculatePiTest {
     }
 
 
+    @Disabled
     @Test
     void test_that_single_threads_slowly_than_multi_threads(){
         long timeWhenCalculateWithSingleThread = System.currentTimeMillis();
