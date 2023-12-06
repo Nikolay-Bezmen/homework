@@ -59,6 +59,7 @@ public class BFSSolver {
                     if (dx == x2 && dy == y2) {
                         return currPath;
                     }
+
                     queue.add(new ArrayList<>(currPath));
                     paint(20, bo);
                     currPath.remove(currPath.size() - 1);
