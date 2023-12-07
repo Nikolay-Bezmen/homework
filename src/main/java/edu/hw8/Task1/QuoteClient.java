@@ -12,7 +12,8 @@ public class QuoteClient {
     static final String LOCAL_HOST = "localhost";
 
     public static void main(String[] args) throws IOException {
-        try (Socket socket = new Socket(LOCAL_HOST, PORT); PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        try (Socket socket = new Socket(LOCAL_HOST, PORT);
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in))) {
             String userInput;

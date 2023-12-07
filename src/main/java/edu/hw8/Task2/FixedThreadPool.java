@@ -12,27 +12,7 @@ public class FixedThreadPool implements ThreadPool {
         threads = new Thread[countThreads];
 
         for (int i = 0; i < countThreads; ++i) {
-            threads[i] = new Thread(() -> {
-                while (!Thread.currentThread().isInterrupted()) {
-                    Runnable newTask;
-                    synchronized (tasks) {
-                        while (tasks.isEmpty()) {
-                            try {
-                                tasks.wait();
-                            } catch (InterruptedException e) {
-                                return;
-                            }
-                        }
-                        newTask = tasks.poll();
-                    }
-
-                    try {
-                        newTask.run();
-                    } catch (RuntimeException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
+            threads[i] = new Thread(new RunnableTask());
         }
     }
 
@@ -65,6 +45,35 @@ public class FixedThreadPool implements ThreadPool {
                 return true;
             } else {
                 return false;
+            }
+        }
+    }
+
+    private class RunnableTask implements Runnable {
+
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                Runnable newTask = getTaskFromQueue();
+
+                try {
+                    newTask.run();
+                } catch (RuntimeException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        private Runnable getTaskFromQueue() {
+            synchronized (tasks) {
+                while (tasks.isEmpty()) {
+                    try {
+                        tasks.wait();
+                    } catch (InterruptedException e) {
+                        return null;
+                    }
+                }
+                return tasks.poll();
             }
         }
     }

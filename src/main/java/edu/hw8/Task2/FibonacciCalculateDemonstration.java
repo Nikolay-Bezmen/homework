@@ -24,19 +24,36 @@ public class FibonacciCalculateDemonstration {
     }
 
     private static long fibonacciCalculate(long n) {
-        if (n <= 1) {
+        if (n < 2) {
             return n;
         }
 
-        long prev = 0L;
-        long curr = 1L;
-        for (int i = 2; i <= n; i++) {
-            long summary = prev + curr;
-            prev = curr;
-            curr = summary;
+        long[] startMatrix = {1, 1, 1, 0};
+        long[] result = pow(startMatrix, n - 1);
 
+        return result[0];
+    }
+
+    private static long[] pow(long[] matrix, long n) {
+        if (n == 1) {
+            return matrix;
         }
 
-        return curr;
+        if (n % 2 == 0) {
+            return pow(multiply(matrix, matrix), n / 2);
+        }
+
+        return multiply(matrix, pow(matrix, n - 1));
+    }
+
+    private static long[] multiply(long[] matrix1, long[] matrix2) {
+        long[] resultMultiply = new long[4];
+
+        resultMultiply[0] = matrix1[0] * matrix2[0] + matrix1[1] * matrix2[2];
+        resultMultiply[1] = matrix1[0] * matrix2[1] + matrix1[1] * matrix2[3];
+        resultMultiply[2] = resultMultiply[1];
+        resultMultiply[3] = matrix1[2] * matrix2[1] + matrix1[3] * matrix2[3];
+
+        return resultMultiply;
     }
 }
