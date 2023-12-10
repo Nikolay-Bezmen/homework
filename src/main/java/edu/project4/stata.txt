@@ -1,0 +1,11 @@
+multiThreading vs singleThreading:
+1) << sampleCounts = 1_000_0 | iterationCounts = 500 | affineCounts = 10 | symmetry = 5 >>
+    process time:
+    << single = 5.5 - 5.7sec >>
+    << multi (12 threads) = 4.4-4.6sec>>
+
+2) << sampleCounts = 1_000_00 | iterationCounts = 500 | affineCounts = 10 | symmetry = 5 >>
+    process time:
+    << single = 38-52.5sec >>
+    << multi (12 threads) = 28 - 32 sec>>
+
