@@ -1,6 +1,5 @@
-package edu.hw10;
+package edu.hw10.Task1;
 
-import edu.hw10.Task1.RandomObjectGenerator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,6 +10,5 @@ public class RandomObjectGeneratorTest {
         RandomObjectGenerator randomObjectGenerator = new RandomObjectGenerator();
 
         assertThrows(Exception.class, () -> randomObjectGenerator.nextObject(null));
-
     }
 }
