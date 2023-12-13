@@ -15,8 +15,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 public class QuoteServerClientTest {
-
-
     @Test
     void test_if_count_client_more_than_count_connections() throws InterruptedException {
         QuoteServer server = new QuoteServer();

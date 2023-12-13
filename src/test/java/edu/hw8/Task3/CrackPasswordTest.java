@@ -93,6 +93,5 @@ public class CrackPasswordTest {
         long singleProcessTime = System.currentTimeMillis() - startSingle;
 
         assertThat(multiProcessTime).isLessThan(singleProcessTime);
-
     }
 }
