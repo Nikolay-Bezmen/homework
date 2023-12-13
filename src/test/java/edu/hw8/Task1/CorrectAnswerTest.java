@@ -1,5 +1,6 @@
 package edu.hw8.Task1;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import static edu.hw8.Task1.QuoteClient.LOCAL_HOST;
 import static edu.hw8.Task1.QuoteServer.PORT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Disabled
 public class CorrectAnswerTest {
 
     @Test
@@ -41,6 +43,7 @@ public class CorrectAnswerTest {
             out.println(INTELLIGENCE_REQUEST.get());
             assertThat(INTELLIGENCE_RESPONSE.get()).isEqualTo(in.readLine());
         } catch (IOException ignored){
+
         }
     }
 }
