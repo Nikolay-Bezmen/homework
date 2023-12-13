@@ -1,0 +1,15 @@
+count :    1           ; delta =  21          ; pi =    3,135504    ; simulation  1000000
+count :    1           ; delta =  80          ; pi =    3,134160    ; simulation  10000000
+count :    1           ; delta =  775         ; pi =    3,134803    ; simulation  100000000
+count :    1           ; delta =  7540        ; pi =    3,135093    ; simulation  1000000000
+--------------
+count :    8           ; delta =  0           ; pi =    3,135140    ; simulation  1000000
+count :    8           ; delta =  16          ; pi =    3,133920    ; simulation  10000000
+count :    8           ; delta =  104         ; pi =    3,135117    ; simulation  100000000
+count :    8           ; delta =  1084        ; pi =    3,135133    ; simulation  1000000000
+-------------
+simulation          how many times is multithreading faster
+1000000       ;                    +inf
+10000000      ;                      5
+100000000     ;                     7.45
+1000000000    ;                     6.96
