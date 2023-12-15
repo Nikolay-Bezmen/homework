@@ -86,8 +86,6 @@ public class StatisticsCollectorTest {
         List<MetricStats> stats = collector.getStats();
 
         assertThat(stats.size()).isEqualTo(correctStats.size());
-        for (MetricStats stata : stats){
-            assertThat(correctStats.contains(stata)).isTrue();
-        }
+        assertThat(stats.containsAll(correctStats)).isTrue();
     }
 }

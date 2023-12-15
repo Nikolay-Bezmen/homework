@@ -1,13 +1,13 @@
 package edu.hw9.Task1;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class StatisticsCollector {
-    private final List<MetricStats> metrics = Collections.synchronizedList(new ArrayList<>());
+    private final List<MetricStats> metrics = Collections.synchronizedList(new LinkedList<>());
     private final ExecutorService executerStats;
 
     public void push(String newMetric, double[] data) {
@@ -34,7 +34,7 @@ public class StatisticsCollector {
     }
 
     public List<MetricStats> getStats() {
-        return new ArrayList<>(metrics);
+        return new LinkedList<>(metrics);
     }
 }
 
