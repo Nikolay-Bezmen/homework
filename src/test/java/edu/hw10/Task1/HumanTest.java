@@ -1,11 +1,12 @@
 package edu.hw10.Task1;
 
+import edu.hw10.Task1.annotations.annotationExceptions.AnnotationsAreIncompatible;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HumanTest {
     @Test
-    public void testHuman() {
+    public void testHuman() throws AnnotationsAreIncompatible {
         RandomObjectGenerator randomObjectGenerator = new RandomObjectGenerator();
         Human human = randomObjectGenerator.nextObject(Human.class);
 
