@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class CacheInvocationHandler implements InvocationHandler {
     private final Object delegate;
-    private final Map<String, Object> cache = new HashMap<>();
+    private final ConcurrentMap<String, Object> cache = new ConcurrentHashMap<>();
     private final File file;
 
     public CacheInvocationHandler(Object delegate, File file) {
