@@ -2,6 +2,8 @@ package edu.Project2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveTask;
 import static edu.Project2.Maze.PATH;
 import static edu.Project2.Maze.SPACE;
 
@@ -9,55 +11,38 @@ import static edu.Project2.Maze.SPACE;
 public class DFSSolver {
     public final static String DFS = "dfs";
     public final static String COORDINATE_INCORRECT = "неверные координаты";
-    private static final int[][] PATH_DIRESTIONS = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    private static final int[][] PATH_DIRECTIONS = new int[][] {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     private static char[][] matrix;
     private static boolean[][] seen;
-    private static boolean find = false;
     private static BeautyOutput beautyOutput;
+    private static ForkJoinPool pool = new ForkJoinPool();
 
-    public static List<int[]> getPath(char[][] matrixFromMaze, int x1, int y1, int x2, int y2, BeautyOutput bo)
-        throws InterruptedException {
+    public static List<int[]> getPath(char[][] matrixFromMaze, int x1, int y1, int x2, int y2, BeautyOutput bo) {
         beautyOutput = bo;
         matrix = matrixFromMaze;
         int height = matrix.length;
         int width = matrix[0].length;
         seen = new boolean[height][width];
 
-        if (x1 < 1 || x2 < 1 || x1 >= width - 1 || x2 >= width - 1
-            || y1 < 1 || y2 < 1 || y1 >= height - 1 || y2 >= height - 1) {
-            throw new IllegalArgumentException(COORDINATE_INCORRECT);
-        }
-        dfs(x1, y1, x2, y2);
+        checkCoordinatesOnCorrect(x1, y1, x2, y2, height, width);
+
+        DFSRecursiveTask dfsTask = new DFSRecursiveTask(x1, y1, x2, y2);
+        boolean find = pool.invoke(dfsTask);
 
         List<int[]> path = new ArrayList<>();
         path.add(new int[] {x1, y1});
 
-        createPathInMatrix(path, x1, y1, x2, y2);
+        if (find) {
+            createPathInMatrix(path, x1, y1, x2, y2);
+        }
 
         return path;
     }
 
-    private static void dfs(int x, int y, int findX, int findY) throws InterruptedException {
-        if (y == findX && x == findY) {
-            find = true;
-            matrix[x][y] = PATH;
-            return;
-        }
-
-        for (int[] direction : PATH_DIRESTIONS) {
-            int dx = x + direction[0];
-            int dy = y + direction[1];
-
-            if (isValid(dx, dy) && matrix[dx][dy] == SPACE) {
-                matrix[dx][dy] = 'M';
-                paint(20, beautyOutput);
-                dfs(dx, dy, findX, findY);
-                if (find) {
-                    matrix[x][y] = PATH;
-                    paint(20, beautyOutput);
-                    return;
-                }
-            }
+    static void checkCoordinatesOnCorrect(int x1, int y1, int x2, int y2, int height, int width) {
+        if (x1 < 1 || x2 < 1 || x1 >= width - 1 || x2 >= width - 1
+            || y1 < 1 || y2 < 1 || y1 >= height - 1 || y2 >= height - 1) {
+            throw new IllegalArgumentException(COORDINATE_INCORRECT);
         }
     }
 
@@ -65,7 +50,7 @@ public class DFSSolver {
         int currX = x;
         int currY = y;
         while (currX != endY || currY != endX) {
-            for (int[] direction : PATH_DIRESTIONS) {
+            for (int[] direction : PATH_DIRECTIONS) {
                 int dx = currX + direction[0];
                 int dy = currY + direction[1];
                 if (isValid(dx, dy) && matrix[dx][dy] == PATH && !seen[dx][dy]) {
@@ -90,4 +75,53 @@ public class DFSSolver {
         return x >= 1 && y >= 1 && y < matrix[0].length - 1 && x < matrix.length - 1;
     }
 
+    private static class DFSRecursiveTask extends RecursiveTask<Boolean> {
+        int x;
+        int y;
+        int findX;
+        int findY;
+
+        DFSRecursiveTask(int x, int y, int findX, int findY) {
+            this.x = x;
+            this.y = y;
+            this.findX = findX;
+            this.findY = findY;
+        }
+
+        @Override
+        protected Boolean compute() {
+            if (y == findX && x == findY) {
+                matrix[x][y] = PATH;
+                return true;
+            }
+
+            for (int[] direction : PATH_DIRECTIONS) {
+                int dx = x + direction[0];
+                int dy = y + direction[1];
+
+                if (isValid(dx, dy) && matrix[dx][dy] == SPACE) {
+                    matrix[dx][dy] = 'M';
+                    try {
+                        paint(20, beautyOutput);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    DFSRecursiveTask task = new DFSRecursiveTask(dx, dy, findX, findY);
+                    task.fork();
+                    boolean result = task.join();
+                    if (result) {
+                        matrix[x][y] = PATH;
+                        try {
+                            paint(20, beautyOutput);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
 }
+

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import static edu.Project2.DFSSolver.COORDINATE_INCORRECT;
 import static edu.Project2.Maze.PATH;
 import static edu.Project2.Maze.SPACE;
 
@@ -21,10 +20,7 @@ public class BFSSolver {
         height = matrix.length;
         width = matrix[0].length;
 
-        if (x1 < 1 || x2 < 1 || x1 >= width - 1 || x2 >= width - 1
-            || y1 < 1 || y2 < 1 || y1 >= height - 1 || y2 >= height - 1) {
-            throw new IllegalArgumentException(COORDINATE_INCORRECT);
-        }
+        DFSSolver.checkCoordinatesOnCorrect(x1, y1, x2, y2, height, width);
 
         Queue<List<int[]>> queue = new LinkedList<>();
         List<int[]> st = new ArrayList<>();
@@ -52,6 +48,7 @@ public class BFSSolver {
             int[] currDot = currPath.get(currPath.size() - 1);
             int x = currDot[0];
             int y = currDot[1];
+
             for (int[] pathDirection : PATH_DIRECTIONS) {
                 int dx = x + pathDirection[0];
                 int dy = y + pathDirection[1];
@@ -62,6 +59,7 @@ public class BFSSolver {
                     if (dx == x2 && dy == y2) {
                         return currPath;
                     }
+
                     queue.add(new ArrayList<>(currPath));
                     paint(20, bo);
                     currPath.remove(currPath.size() - 1);
